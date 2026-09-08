@@ -18,10 +18,13 @@ These are special graph classes; the general Tuza conjecture is not resolved.
 ## Build and status
 
 The project pins Lean 4.33.1 and Mathlib commit
-`0df444a360eaa60ab8c11dca51a86af692955474`. With the Lean toolchain installed:
+`db584cd6d46c92f209a44c0f1c829460d327499d`, an ancestor of Mathlib's canonical
+master branch. Its mathematical source is identical to the initially checked
+4.33.1 release commit; that release commit itself fails Palomar's ancestry
+policy. The patched Lean 4.33.1 kernel is retained, and dependencies are built
+from source. With the Lean toolchain installed:
 
 ```sh
-lake exe cache get
 lake build
 ```
 
