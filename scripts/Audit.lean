@@ -30,7 +30,25 @@ run_cmd do
     `Tuza.lineGraph_factor_sharp,
     `Tuza.two_original_vertices_force_bridge,
     `Tuza.bridge_is_triangle,
-    `Tuza.incidence_is_triangle]
+    `Tuza.incidence_is_triangle,
+    `Tuza.cliqueCoverCost_le_twice_packing,
+    `Tuza.cliqueCoverCost_add_two_le_twice_packing,
+    `Tuza.exists_eulerian_closed_walk,
+    `Tuza.exists_eulerian_edge_coloring,
+    `Tuza.exists_odd_edge_coloring,
+    `Tuza.exists_balanced_edge_coloring,
+    `Tuza.exists_line_packet_packing,
+    `Tuza.linePacking_lower_bound,
+    `Tuza.line_monochromatic_card,
+    `Tuza.line_triangleFree_cover_bound,
+    `Tuza.line_eulerian_cover_bound,
+    `Tuza.line_satisfiesTuza_of_components,
+    `Tuza.total_packing_number_ge_edges_add_line,
+    `Tuza.total_cover_upper_bound,
+    `Tuza.total_exists_incident_edge_assignment,
+    `Tuza.totalGraph_satisfiesTuza,
+    `Tuza.lineGraph_satisfiesTuza,
+    `Tuza.cubic_triangleFree_total_parameters]
   let env ← getEnv
   for name in targets do
     match env.find? name with

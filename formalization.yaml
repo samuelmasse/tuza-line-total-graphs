@@ -3,12 +3,13 @@ version: v0.4
 project:
   name: "Tuza's conjecture for line and total graphs"
   description: >-
-    Formalization in progress of the inequality tau <= 2 nu for line graphs
-    and total graphs of finite simple roots, with a sharp line-graph factor
-    and the exact equality tau = nu = 5n/2 for cubic triangle-free total roots.
-    The two universal inequalities and cubic equality are not yet implemented.
-    The current development proves supporting lemmas and the line-graph
-    sharpness witness and is not ready for registration.
+    For a finite simple graph, let nu be the maximum number of pairwise
+    edge-disjoint triangles and tau the minimum number of edges meeting all
+    triangles. This project proves tau <= 2 nu for the line graph and the total
+    graph of every finite simple root. The line-graph factor two is sharp.
+    For cubic triangle-free roots on n vertices, the total graph satisfies
+    tau = nu = 5n/2. Empty and disconnected roots are included. These graph
+    classes do not resolve Tuza's conjecture for arbitrary graphs.
   authors: ["Samuel Massé"]
   responsible_maintainers: ["Samuel Massé"]
   license: MIT
@@ -24,7 +25,8 @@ sources:
     relationship: formalizes
     note: >-
       Unpublished manuscript dated 7 September 2026, included in this repository.
-      Formalization is incomplete. See docs/provenance.md for source hashes.
+      The four advertised results are formalized. See docs/provenance.md for
+      source hashes, proof alternatives and the auxiliary-proposition scope.
   - title: "Sur quelques invariants classiques et nouveaux des hypergraphes"
     authors: ["Andrea Munaro"]
     id: https://andreamunaro.github.io/munaro-thesis.pdf
@@ -37,13 +39,28 @@ related_formalizations:
     relationship: builds-on
     note: Adapts VMath/Tuza/Basic.lean definitions; no completed line/total proof is imported.
 status:
-  scope: "Supporting formalization and sharpness witness; two universal inequalities and cubic equality remain open."
+  scope: "All four advertised results; auxiliary manuscript propositions are not separately advertised targets."
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
   main_results:
+    - declaration: Tuza.lineGraph_satisfiesTuza
+      file: Tuza/LineBound.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: Tuza.totalGraph_satisfiesTuza
+      file: Tuza/TotalBound.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
     - declaration: Tuza.lineGraph_factor_sharp
       file: Tuza/SmallGraphs.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator.json
+    - declaration: Tuza.cubic_triangleFree_total_parameters
+      file: Tuza/CubicTotal.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator.json
@@ -61,25 +78,32 @@ fidelity:
   divergences: >-
     The formal targets retain finite simple roots, empty and disconnected cases,
     ordinary edge packings and covers. Cubic equality is stated using doubled
-    natural-number counts to avoid truncating 5n/2. The two universal inequality
-    proofs and the cubic equality proof remain absent.
+    natural-number counts to avoid truncating 5n/2. The clique bounds use a
+    Latin-square recurrence and explicit kernel-checked finite bases instead
+    of the manuscript's clique construction. Cubic equality uses a Hall
+    assignment instead of balanced orientations. The general triangle-free
+    total-cover proposition and standalone orientation lemma are not separate
+    targets. See docs/provenance.md and docs/statement-audit.md.
 review:
   status: unchecked
   notes: >-
     The manuscript has an internal AI-assisted audit in vmath. This does not
-    constitute independent review of the formal translation. No Comparator,
-    NanoDa, Palomar review, human expert review or novelty certification is claimed.
+    constitute human expert review. A separate AI judgment pass checked the
+    four target statements and their shared-definition trust boundary; see
+    docs/statement-audit.md. Local Lean compilation and axiom audits are
+    recorded in docs/progress.md. No Comparator, NanoDa, Palomar review,
+    human expert review or novelty certification is claimed by this snapshot.
 alignment:
   namespace: Tuza
   statements:
     - source: Theorem 1.1
       lean: Tuza.lineGraph_satisfiesTuza
       module: Solution
-      status: not-formalized
+      status: proved
     - source: Theorem 1.2
       lean: Tuza.totalGraph_satisfiesTuza
       module: Solution
-      status: not-formalized
+      status: proved
     - source: Sharpness in the proof of Theorem 1.1
       lean: Tuza.lineGraph_factor_sharp
       module: Solution
@@ -87,5 +111,5 @@ alignment:
     - source: Corollary 1.3
       lean: Tuza.cubic_triangleFree_total_parameters
       module: Solution
-      status: not-formalized
+      status: proved
 acknowledgements: "OpenAI's GPT-6 Astra; the Lean and Mathlib communities."

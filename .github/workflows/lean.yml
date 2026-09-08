@@ -1,4 +1,4 @@
-name: Implemented Lean proofs
+name: Lean proofs and headline audit
 
 on:
   push:
@@ -19,5 +19,5 @@ jobs:
         run: lake build Challenge
       - name: Audit implemented proof axioms
         run: lake env lean scripts/Audit.lean
-      - name: State the scope of this build
-        run: echo 'Implemented proofs checked. This workflow does not certify that all Palomar headline targets are complete.'
+      - name: Require every advertised headline proof
+        run: lake env lean scripts/CheckReady.lean

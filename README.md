@@ -2,13 +2,11 @@
 
 **Author: Samuel Massé. AI assistance: OpenAI's GPT-6 Astra. License: MIT.**
 
-Lean formalization **in progress** of the [seven-page paper](paper/tuza-line-total-graphs.pdf).
-The two headline theorems are not yet proved in Lean. This repository has not
-been submitted to or registered with Palomar.
-
-The implemented proofs include the line-graph triangle classification,
-unique wedge ownership, packing/cover certificate lemmas, clique parity
-identities and the sharpness witness `L(K_{1,4})` with `(ν, τ) = (1, 2)`.
+Lean proofs of the four advertised results in the
+[seven-page paper](paper/tuza-line-total-graphs.pdf): the two universal
+inequalities, line-graph sharpness, and cubic triangle-free equality.
+Palomar verification and registration are separate from local compilation;
+see [the progress record](docs/progress.md) for the recorded status.
 
 For a graph G, let ν(G) be the largest number of pairwise edge-disjoint
 triangles, and τ(G) the smallest number of edges meeting every triangle.
@@ -27,18 +25,18 @@ lake exe cache get
 lake build
 ```
 
-`lake build` checks implemented supporting proofs. It does **not** mean that
-the manuscript has been completely formalized. See the exact outstanding
-obligations in [the progress record](docs/progress.md).
+Run `lake env lean scripts/CheckReady.lean` to require all four headline
+declarations and audit their transitive axioms. The four targets retain empty
+and disconnected roots. They do not separately certify every auxiliary
+proposition printed in the manuscript.
 
 - `Tuza/`: definitions and implemented proof modules.
 - `Challenge.lean`: the independent, readable target statements; deliberate
   statement holes are permitted here by Comparator's design.
 - `Solution.lean`: proof entry point, which never imports Challenge.
-- `comparator.json`: all four advertised target declarations; the two universal
-  inequalities and cubic equality are still absent from Solution.
+- `comparator.json`: all four advertised target declarations.
 - `scripts/check-ready.ps1`: rejects missing headline proofs and unapproved
-  axioms. This check must fail while formalization is incomplete.
+  axioms.
 - `formalization.yaml`: author, sources, automation disclosure and limitations.
 - `paper/`: the frozen manuscript, bibliography and PDF.
 
@@ -50,9 +48,15 @@ SHA-256 is recorded in [the provenance note](docs/provenance.md).
 
 GPT-6 Astra assisted with proof development, internal argument checking,
 literature search, exposition and Lean formalization. The manuscript has an
-internal AI-assisted audit and independent finite checks. Those checks do not
-establish universal Lean proofs, expert review or novelty. No formal proof may
-use a missing theorem as an axiom or rely on `native_decide`.
+internal AI-assisted audit and finite checks. The Lean development supplies
+universal proofs independently of those finite experiments. Neither the
+internal audit nor kernel checking establishes expert review or novelty.
+No formal proof uses a missing theorem as an axiom or relies on `native_decide`.
+
+The [provenance note](docs/provenance.md) records two formal proof alternatives:
+Latin-square induction for the clique bounds and a Hall assignment for cubic
+equality. The [statement audit](docs/statement-audit.md) describes the exact
+four-target scope and its shared-definition trust boundary.
 
 [Palomar](https://palomar-registry.org/about) requires completed formal proofs,
 Comparator verification, Lean and NanoDa replay, and automated review of the

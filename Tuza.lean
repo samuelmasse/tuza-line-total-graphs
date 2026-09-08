@@ -6,3 +6,8 @@ import Tuza.ColorCover
 import Tuza.LineTriangles
 import Tuza.SmallGraphs
 import Tuza.TotalTriangles
+import Tuza.CubicTotal
+import Tuza.LineComponents
+import Tuza.LineConnected
+import Tuza.TotalBound
+import Tuza.LineBound

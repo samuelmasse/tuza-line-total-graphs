@@ -10,10 +10,17 @@ hypotheses are the explicitly named cubic triangle-free equality case.
 
 | Declaration in Challenge | Manuscript result | Lean proof status |
 |---|---|---|
-| `Tuza.lineGraph_satisfiesTuza` | Theorem 1.1: every finite simple line graph | Missing |
-| `Tuza.totalGraph_satisfiesTuza` | Theorem 1.2: every finite simple total graph | Missing |
+| `Tuza.lineGraph_satisfiesTuza` | Theorem 1.1: every finite simple line graph | Proved; transitive axiom audit passed |
+| `Tuza.totalGraph_satisfiesTuza` | Theorem 1.2: every finite simple total graph | Proved; transitive axiom audit passed |
 | `Tuza.lineGraph_factor_sharp` | Sharp factor two, witnessed by a four-leaf star | Proved by kernel reduction of the explicit finite witness |
-| `Tuza.cubic_triangleFree_total_parameters` | Corollary 1.3: τ = ν = 5n/2 | Missing |
+| `Tuza.cubic_triangleFree_total_parameters` | Corollary 1.3: τ = ν = 5n/2 | Proved; transitive axiom audit passed |
+
+All four advertised proofs now compile. `scripts/CheckReady.lean` passes and
+finds only `propext`, `Classical.choice` and `Quot.sound` in each headline.
+The expanded [42-theorem axiom audit](completion-axiom-audit-2026-09-08.txt)
+also passed. The [statement audit](statement-audit.md) describes the precise
+scope, empty/disconnected cases and the shared-definition trust boundary.
+External Comparator, NanoDa and Palomar checks remain separate pending steps.
 
 ## Dependency plan
 
@@ -28,8 +35,10 @@ hypotheses are the explicitly named cubic triangle-free equality case.
    seam per connected component. Prove all parity and component facts.
 5. Combine local witnesses into genuine disjoint global packings and covers;
    prove the three seam-repair branches and the two headline inequalities.
-6. Formalize balanced orientations, the sharper triangle-free cover, the cubic
-   equality, and the explicit sharpness witness.
+6. Prove cubic equality and sharpness. The implemented cubic proof uses Hall's
+   theorem and an incident-edge assignment instead of the manuscript's
+   orientation argument. The general sharper triangle-free total cover and
+   standalone orientation lemma are not separate advertised targets.
 7. Compare the exact Challenge/Solution declarations, replay the proofs, audit
    source alignment, complete the Palomar review process and obtain the
    author's decision on registration.
@@ -40,7 +49,8 @@ triangle classification, unique wedge ownership, clique parity identities,
 the monochromatic-edge triangle cover and the sharpness witness. Fixed
 representation checks cover `K_4`, the empty total graph, a single-edge total
 graph and the line graph of a triangle. Every remaining universal proof is
-listed above rather than replaced by a stub theorem in Solution.
+initially listed above rather than replaced by a stub theorem in Solution.
+The completion campaign has now supplied the previously missing proofs.
 
 Total-graph bridge construction, forced bridge identification for two original
 vertices and the incidence-triangle construction also compile.
@@ -61,7 +71,10 @@ vertices and the incidence-triangle construction also compile.
   Challenge imports/proof holes in the implementation were checked.
 - Copied manuscript, bibliography and PDF hashes match the frozen source.
 
-No Palomar intake, Comparator execution or NanoDa replay has occurred.
+These initial checks are historical; the earlier failed readiness output
+documents the scaffold at the initial commit. The completion build and
+four-target readiness/axiom checks now pass. No Palomar intake, Comparator
+execution or NanoDa replay has occurred at this source snapshot.
 
 ## Trust boundary
 
@@ -77,10 +90,14 @@ proper-special-class results. This project certifies the manuscript's scope.
 
 Use the installed Lean release and existing Mathlib cache. Initial whole-Mathlib
 import dependency scanning was too broad; imports were narrowed to graph,
-finite-set and required tactic modules. No exhaustive graph search or bounded
-computation is needed for the formalization. Build only changed modules during
+finite-set and required tactic modules. No exhaustive graph search is used;
+the finite clique induction bases are checked from explicit certificates.
+Build only changed modules during
 development, then check the small standalone project at an integration point.
 The first narrowed definition build took 89 seconds; subsequent changed-module
-builds took about 12–29 seconds. Whole-machine physical RAM was 16.7–17.3 GiB
-in the recorded samples. Local dependency-cache reuse is ignored build state;
+builds generally took about 12–29 seconds. The finite clique certificates use
+an explicitly bounded list decider, avoiding enumeration over every subset
+of the ambient vertex type; see [the clique verification note](clique-verification.md).
+Whole-machine physical RAM stayed below 25 GiB in the recorded completion
+samples, within the 54 GiB limit. Local dependency-cache reuse is ignored build state;
 the tracked manifest contains public Git URLs and full commit pins.

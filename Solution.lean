@@ -1,15 +1,13 @@
 import Tuza
 
 /-!
-# Proof entry point — development in progress
+# Proof entry point
 
-The library contains supporting proofs and the line-graph sharpness witness.
-The two universal inequalities and cubic equality listed in `comparator.json`
-are intentionally absent until their complete proofs are implemented. This
-module never imports `Challenge`: the deliberate statement holes there are
-not available as premises here.
+The library supplies all four declarations listed in `comparator.json`: Tuza's
+inequality for every finite simple line and total root, line-graph sharpness,
+and the exact cubic triangle-free total-graph parameters. This module never
+imports `Challenge`; its deliberate statement holes are not proof premises.
 
-`lake build` checks implemented mathematics; it does not certify completion.
-The separate release check must fail until every advertised theorem exists
-and has only the permitted axioms.
+The release check requires all four proofs and audits their transitive axioms.
+Comparator and independent NanoDa replay are separate verification steps.
 -/

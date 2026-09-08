@@ -40,3 +40,28 @@ literature searches, manuscript preparation, repository setup and Lean code.
 The AI is credited as an automated contributor, not as a human author or
 responsible maintainer. Human expert review and an independent review of the
 formal statement have not been recorded.
+
+## Formal proof architecture
+
+The registered targets are the two universal inequalities, line-graph
+sharpness, and the cubic triangle-free equality. The formalization does not
+claim that every auxiliary proposition displayed in the manuscript has a
+corresponding Lean declaration.
+
+Two constructions differ from the manuscript's proofs while retaining those
+exact conclusions:
+
+- The clique bounds use a Latin-square packing on three equal parts, together
+  with internal packings, to prove `D(3q) >= q*q + 3*D(q)`. Strong induction,
+  monotonicity, arithmetic and explicit finite certificates below order 21
+  supply the required bound and even-order slack. This does not assume an
+  exact formula for the complete-graph packing number.
+- The cubic equality uses Hall's theorem to assign distinct incident edges to
+  root vertices. A matching in each four-vertex incidence packet, together
+  with unassigned original edges, gives the required cover. The general
+  triangle-free total-graph cover proposition and the balanced-orientation
+  construction are not separate advertised formal targets.
+
+Euler-tour existence, alternating incidence counts, global component gluing,
+packing transport and the packet constructions are proved within the Lean
+development. Existential certificates remain attached to their own graph.
