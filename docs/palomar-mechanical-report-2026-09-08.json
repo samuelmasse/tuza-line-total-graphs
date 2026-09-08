@@ -1,0 +1,494 @@
+{
+  "challenge": {
+    "bytes": 8061,
+    "canonical_olean_sha256": "966883930378564766ad6f48001e54af3b2872c0a085052f614260d2ff0978fb",
+    "dependencies": [
+      {
+        "provenance": "allowlisted",
+        "repository": "leanprover-community/mathlib4"
+      }
+    ],
+    "direct_imports": [
+      "Mathlib.Combinatorics.SimpleGraph.Clique",
+      "Mathlib.Combinatorics.SimpleGraph.LineGraph",
+      "Mathlib.Data.Finset.Max"
+    ],
+    "lines": 221,
+    "module": "Challenge",
+    "path": "Challenge.lean",
+    "sha256": "58757679b6ebcb62feef2018cdee620534d38d5d664560e58ef148d6f807d2d4",
+    "transitive_source_count": 4,
+    "trust_level": "high",
+    "untrusted_sources": []
+  },
+  "checked_at": "2026-09-08T09:54:28Z",
+  "classification": {
+    "arxiv": [
+      {
+        "code": "math.CO",
+        "name": "Combinatorics"
+      }
+    ],
+    "msc2020": [
+      {
+        "code": "05C35",
+        "name": "Extremal problems in graph theory"
+      },
+      {
+        "code": "05C70",
+        "name": "Edge subsets with special properties (factorization, matching, partitioning, covering and packing, etc.)"
+      }
+    ]
+  },
+  "comparator": {
+    "challenge_module": "Challenge",
+    "definition_names": [],
+    "path": "comparator.json",
+    "permitted_axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+    ],
+    "sha256": "f2f6eb66e396ab8aa89e2cd6b83abf498adc0d72ec37db658bcd3f55cd76ad8f",
+    "solution_module": "Solution",
+    "theorem_names": [
+      "Tuza.lineGraph_satisfiesTuza",
+      "Tuza.totalGraph_satisfiesTuza",
+      "Tuza.lineGraph_factor_sharp",
+      "Tuza.cubic_triangleFree_total_parameters"
+    ]
+  },
+  "comparator_commit": "575674928e239f5bc452aab72d1dd7b0f1326494",
+  "comparator_log_tail": "Building PalomarCanonicalc1058c4895f7012ba8dac6d0.Challenge\nExporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Tuza.lineGraph_satisfiesTuza, Tuza.totalGraph_satisfiesTuza, Tuza.lineGraph_factor_sharp, Tuza.cubic_triangleFree_total_parameters, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from PalomarCanonicalc1058c4895f7012ba8dac6d0.Challenge\nBuilding Solution\n\u2714 [1261/1296] Built Tuza.Definitions (1.7s)\n\u2714 [1262/1296] Built Tuza.CliqueArithmetic (1.8s)\n\u26a0 [1263/1296] Built Tuza.Eulerian (2.0s)\nwarning: Tuza/Eulerian.lean:24:34: This simp argument is unused:\n  Finset.mem_mk\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Finset.mem_filter, Multiset.mem_coe, G.mem_incidenceFinset, mem_incidenceSet]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: Tuza/Eulerian.lean:24:49: This simp argument is unused:\n  Multiset.mem_coe\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Finset.mem_filter, Finset.mem_mk, G.mem_incidenceFinset, mem_incidenceSet]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: Tuza/Eulerian.lean:25:29: This simp argument is unused:\n  mem_incidenceSet\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Finset.mem_filter, Finset.mem_mk, Multiset.mem_coe, G.mem_incidenceFinset]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: Tuza/Eulerian.lean:21:2: Unused tactic linter: `change _ = (G.incidenceFinset x).card` does nothing\n\nNote: This linter can be disabled with `set_option linter.unusedTactic false`\nwarning: Tuza/Eulerian.lean:41:2: Try this: \n  letI\u0335\n\nThe goal is a proposition, so `let` is preferred over `letI`.\nThe difference between `let` and `letI` is that `letI` inlines the value.\nBut this is not relevant for proofs because of proof irrelevance.\n\nNote: This linter can be disabled with `set_option linter.style.haveILetI false`\n\u2714 [1264/1296] Built Tuza.Operators (2.1s)\n\u2714 [1265/1296] Built Tuza.Certificates (2.1s)\n\u2714 [1266/1296] Built Tuza.ColorCover (4.1s)\n\u2714 [1267/1296] Built Tuza.CliqueRecurrenceArithmetic (3.9s)\n\u2714 [1268/1296] Built Tuza.LineArithmetic (2.7s)\n\u26a0 [1269/1296] Built Tuza.BalancedColoring (4.6s)\nwarning: Tuza/BalancedColoring.lean:118:8: automatically included section variable(s) unused in theorem `_private.Tuza.BalancedColoring.0.Tuza.walkAlternatingIncidence_eq`:\n  [Fintype V]\n  [DecidableRel G.Adj]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype V] [DecidableRel G.Adj] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: Tuza/BalancedColoring.lean:129:51: This simp argument is unused:\n  \u2190 Nat.not_even_iff_odd\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [Walk.length_cons, Nat.even_add_one, Sym2.mem_iff]\n\nNote: Simp arguments with `\u2190` have the additional effect of removing the other direction from the simp set, even if the simp argument itself is unused. If the hint above does not work, try replacing `\u2190` with `-` to only get that effect and silence this warning.\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: Tuza/BalancedColoring.lean:134:17: This simp argument is unused:\n  false_or\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [hxu, hxv, hxw, he, not_true_eq_false, not_false_eq_true, or_self, or_false, true_or, or_true,\n    \u2193reduceIte]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: Tuza/BalancedColoring.lean:134:27: This simp argument is unused:\n  or_false\n\nHint: Omit it from the simp argument list.\n  [apply] simp only [hxu, hxv, hxw, he, not_true_eq_false, not_false_eq_true, or_self, false_or, true_or, or_true,\n    \u2193reduceIte]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nwarning: Tuza/BalancedColoring.lean:203:0: automatically included section variable(s) unused in theorem `Tuza.oddAugment_degree_none`:\n  [DecidableEq V]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq V] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: Tuza/BalancedColoring.lean:222:6: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\nwarning: Tuza/BalancedColoring.lean:222:38: Unused tactic linter: `decide` does nothing\n\nNote: This linter can be disabled with `set_option linter.unusedTactic false`\nwarning: Tuza/BalancedColoring.lean:222:38: this tactic is never executed\n\nNote: This linter can be disabled with `set_option linter.unreachableTactic false`\nwarning: Tuza/BalancedColoring.lean:225:0: automatically included section variable(s) unused in theorem `Tuza.oddAugment_connected`:\n  [DecidableEq V]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq V] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: Tuza/BalancedColoring.lean:288:0: automatically included section variable(s) unused in theorem `Tuza.component_degree`:\n  [DecidableEq V]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq V] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u2714 [1270/1296] Built Tuza.TotalTriangles (2.8s)\n\u2714 [1271/1296] Built Tuza.LineTriangles (2.6s)\n\u2714 [1272/1296] Built Tuza.PackingTools (1.8s)\n\u26a0 [1273/1296] Built Tuza.CliqueEdges (2.3s)\nwarning: Tuza/CliqueEdges.lean:14:0: automatically included section variable(s) unused in theorem `Tuza.cliqueEdges_card`:\n  [Fintype V]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype V] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u2714 [1274/1296] Built Tuza.CliqueCertificateTools (2.3s)\n\u2714 [1275/1296] Built Tuza.LatinPacking (2.7s)\n\u2714 [1276/1296] Built Tuza.SmallGraphs (7.6s)\n\u26a0 [1277/1296] Built Tuza.LinePackets (2.5s)\nwarning: Tuza/LinePackets.lean:18:8: automatically included section variable(s) unused in theorem `Tuza.incidenceToEdge_val`:\n  [Fintype V]\n  [DecidableEq V]\n  [DecidableRel G.Adj]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype V] [DecidableEq V] [DecidableRel G.Adj] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: Tuza/LinePackets.lean:21:0: automatically included section variable(s) unused in theorem `Tuza.incidenceToEdge_mem`:\n  [Fintype V]\n  [DecidableEq V]\n  [DecidableRel G.Adj]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype V] [DecidableEq V] [DecidableRel G.Adj] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u26a0 [1278/1296] Built Tuza.LineComponents (2.7s)\nwarning: Tuza/LineComponents.lean:127:2: Try this: \n  letI\u0335\n\nThe goal is a proposition, so `let` is preferred over `letI`.\nThe difference between `let` and `letI` is that `letI` inlines the value.\nBut this is not relevant for proofs because of proof irrelevance.\n\nNote: This linter can be disabled with `set_option linter.style.haveILetI false`\n\u26a0 [1279/1296] Built Tuza.TotalPackets (2.6s)\nwarning: Tuza/TotalPackets.lean:21:8: automatically included section variable(s) unused in theorem `Tuza.inl_mem_totalBridge`:\n  [Fintype V]\n  [DecidableRel G.Adj]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype V] [DecidableRel G.Adj] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: Tuza/TotalPackets.lean:25:8: automatically included section variable(s) unused in theorem `Tuza.inr_mem_totalBridge`:\n  [Fintype V]\n  [DecidableRel G.Adj]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [Fintype V] [DecidableRel G.Adj] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u2714 [1280/1296] Built Tuza.LocalCliqueCover (3.7s)\n\u2714 [1281/1296] Built Tuza.CliqueEdgeAvoidance (2.4s)\n\u2714 [1282/1296] Built Tuza.CliqueConstruction (2.0s)\n\u2714 [1283/1296] Built Tuza.LineTriangleFree (3.6s)\n\u2714 [1284/1296] Built Tuza.LineCovers (4.4s)\n\u2714 [1285/1296] Built Tuza.CubicTotal (4.5s)\n\u2714 [1286/1296] Built Tuza.LineTriangleAugment (2.8s)\n\u2714 [1287/1296] Built Tuza.CliqueRecurrence (2.4s)\n\u2714 [1288/1296] Built Tuza.LineColorBounds (2.3s)\n\u2714 [1289/1296] Built Tuza.CliqueFiniteCertificates (10s)\n\u26a0 [1290/1296] Built Tuza.LineConnected (1.6s)\nwarning: Tuza/LineConnected.lean:13:0: automatically included section variable(s) unused in theorem `Tuza.line_sum_clique_bound`:\n  [DecidableEq V]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq V] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\nwarning: Tuza/LineConnected.lean:72:2: Try this: \n  letI\u0335\n\nThe goal is a proposition, so `let` is preferred over `letI`.\nThe difference between `let` and `letI` is that `letI` inlines the value.\nBut this is not relevant for proofs because of proof irrelevance.\n\nNote: This linter can be disabled with `set_option linter.style.haveILetI false`\n\u2714 [1291/1296] Built Tuza.CompleteGraphPacking (1.4s)\n\u2714 [1292/1296] Built Tuza.LineBound (1.4s)\n\u26a0 [1293/1296] Built Tuza.TotalBound (2.4s)\nwarning: Tuza/TotalBound.lean:160:0: automatically included section variable(s) unused in theorem `Tuza.total_sum_half_degrees_le_edges`:\n  [DecidableEq V]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [DecidableEq V] in theorem ...\n\nNote: This linter can be disabled with `set_option linter.unusedSectionVars false`\n\u2714 [1294/1296] Built Tuza (1.2s)\n\u2714 [1295/1296] Built Solution (1.2s)\nBuild completed successfully (1296 jobs).\nExporting #[Nat, String, String.mk, Char, Quot, Quot.mk, Quot.lift, Quot.ind, Tuza.lineGraph_satisfiesTuza, Tuza.totalGraph_satisfiesTuza, Tuza.lineGraph_factor_sharp, Tuza.cubic_triangleFree_total_parameters, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce] from Solution\nRunning nanoda kernel on solution\nnanoda kernel accepts the solution\nRunning Lean default kernel on solution.\nLean default kernel accepts the solution\nYour solution is okay!",
+  "errors": [],
+  "existing_id": null,
+  "formalization": {
+    "automation_method_count": 1,
+    "path": "formalization.yaml",
+    "project_name": "Tuza's conjecture for line and total graphs",
+    "review_status": "unchecked",
+    "sha256": "e6cc6b11b8b5a0b62a4bb3b0162550b99c7183715d14d9cb44fb24e6480ff51f",
+    "source_count": 2
+  },
+  "lake_manifest": {
+    "path": "lake-manifest.json",
+    "sha256": "bb3d791424ba96fca8a084c94500f334f23e0459190c1e94e6e3d74924817990"
+  },
+  "lakefile": {
+    "format": "toml",
+    "path": "lakefile.toml",
+    "sha256": "ed75d781db482f826055646d9d673f819fab0fb3e2b0654b9ad15b0b0da5e599"
+  },
+  "landrun_commit": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4",
+  "lean4export_commit": "15f6055e299ad5b89345e533cc2192f4cc00f659",
+  "lean_toolchain": "leanprover/lean4:v4.33.1",
+  "lean_toolchain_path": "lean-toolchain",
+  "license": {
+    "declared_identifier": "MIT",
+    "detected_identifier": "MIT",
+    "path": "LICENSE",
+    "sha256": "9a0886f151682fa76ba8492b8d26989613fd388e45fb60a034e0ca4c81b0ee4d"
+  },
+  "mathlib_cache": {
+    "available": true,
+    "required": true
+  },
+  "nanoda_commit": "68d5ca9db226849b41a6fff59d796ff19d0a8840",
+  "orcid_validation": {
+    "checked_at": "2026-09-08T06:09:11Z",
+    "records": [],
+    "registry": "https://orcid.org",
+    "schema_version": 1
+  },
+  "phase": "verification",
+  "project_dependencies": [
+    {
+      "name": "mathlib",
+      "repository": "leanprover-community/mathlib4",
+      "revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+      "url": "https://github.com/leanprover-community/mathlib4.git"
+    },
+    {
+      "name": "plausible",
+      "repository": "leanprover-community/plausible",
+      "revision": "b7eb3304aeae834b12dda98993a37f6a41f6f0bb",
+      "url": "https://github.com/leanprover-community/plausible"
+    },
+    {
+      "name": "LeanSearchClient",
+      "repository": "leanprover-community/LeanSearchClient",
+      "revision": "5f4d51b81cbd3f6b32b156bfad9056621a040404",
+      "url": "https://github.com/leanprover-community/LeanSearchClient"
+    },
+    {
+      "name": "importGraph",
+      "repository": "leanprover-community/import-graph",
+      "revision": "16f02aa7642864af59f1ff0e384a015994db9118",
+      "url": "https://github.com/leanprover-community/import-graph"
+    },
+    {
+      "name": "proofwidgets",
+      "repository": "leanprover-community/ProofWidgets4",
+      "revision": "4be2e3d5087eeb272cf5a8853b8f9dd025ef5957",
+      "url": "https://github.com/leanprover-community/ProofWidgets4"
+    },
+    {
+      "name": "aesop",
+      "repository": "leanprover-community/aesop",
+      "revision": "3448c0bcc5ce01b2d1546e483ec3620e32df3d0e",
+      "url": "https://github.com/leanprover-community/aesop"
+    },
+    {
+      "name": "Qq",
+      "repository": "leanprover-community/quote4",
+      "revision": "92c15be17b7caf78c2ad767ec40f89052d908d81",
+      "url": "https://github.com/leanprover-community/quote4"
+    },
+    {
+      "name": "batteries",
+      "repository": "leanprover-community/batteries",
+      "revision": "4488d40d070b9700d4d5a6aa342f0d40c31b2a2d",
+      "url": "https://github.com/leanprover-community/batteries"
+    },
+    {
+      "name": "Cli",
+      "repository": "leanprover/lean4-cli",
+      "revision": "6130a47896ce867c6a4a55373441e59e565bad0f",
+      "url": "https://github.com/leanprover/lean4-cli"
+    }
+  ],
+  "provenance": {
+    "mathematical_sources": [
+      {
+        "authors": [
+          {
+            "name": "Samuel Mass\u00e9"
+          }
+        ],
+        "identifier": "paper/main.tex",
+        "location": "Theorems 1.1 and 1.2; Corollary 1.3; line-graph sharpness",
+        "note": "Unpublished manuscript dated 7 September 2026, included in this repository. The four advertised results are formalized. See docs/provenance.md for source hashes, proof alternatives and the auxiliary-proposition scope.",
+        "relationship": "formalizes",
+        "title": "Tuza's conjecture for line and total graphs",
+        "type": "paper"
+      },
+      {
+        "authors": [
+          {
+            "name": "Andrea Munaro"
+          }
+        ],
+        "identifier": "https://andreamunaro.github.io/munaro-thesis.pdf",
+        "location": "Theorem 3.3.2 and Corollary 3.3.3",
+        "note": "Classical clique-packing construction attributed to Seb\u0151 and prior triangle-free-root line-graph result.",
+        "relationship": "background",
+        "title": "Sur quelques invariants classiques et nouveaux des hypergraphes",
+        "type": "book"
+      }
+    ],
+    "related_formalizations": [
+      {
+        "identifier": "https://github.com/samuelmasse/vmath",
+        "note": "Adapts VMath/Tuza/Basic.lean definitions; no completed line/total proof is imported.",
+        "relationship": "builds-on"
+      }
+    ],
+    "repository_role": "substantive-development",
+    "responsible_maintainers": [
+      {
+        "name": "Samuel Mass\u00e9"
+      }
+    ],
+    "result_origin": "source-based"
+  },
+  "resource_usage": [
+    {
+      "elapsed_seconds": 0.004,
+      "max_rss_kib": 13368,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 0,
+      "system_cpu_seconds": 0.004,
+      "user_cpu_seconds": 0.001,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.007,
+      "max_rss_kib": 13204,
+      "peak_tasks_observed": 1,
+      "phase": "landrun",
+      "returncode": 0,
+      "system_cpu_seconds": 0.005,
+      "user_cpu_seconds": 0.002,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.004,
+      "max_rss_kib": 13368,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 1,
+      "system_cpu_seconds": 0.003,
+      "user_cpu_seconds": 0.002,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.024,
+      "max_rss_kib": 13368,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 0,
+      "system_cpu_seconds": 0.008,
+      "user_cpu_seconds": 0.016,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.025,
+      "max_rss_kib": 13192,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.007,
+      "user_cpu_seconds": 0.018,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.025,
+      "max_rss_kib": 13368,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.006,
+      "user_cpu_seconds": 0.019,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.022,
+      "max_rss_kib": 13196,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.008,
+      "user_cpu_seconds": 0.014,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 2.138,
+      "max_rss_kib": 896112,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.446,
+      "user_cpu_seconds": 1.747,
+      "workspace_disk_peak_bytes": 1462272
+    },
+    {
+      "elapsed_seconds": 0.07,
+      "max_rss_kib": 93592,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.037,
+      "user_cpu_seconds": 0.049,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 48.587,
+      "max_rss_kib": 1022416,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 43.06,
+      "user_cpu_seconds": 72.388,
+      "workspace_disk_peak_bytes": 7788855296
+    },
+    {
+      "elapsed_seconds": 13195.855,
+      "max_rss_kib": 4587512,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 4654.041,
+      "user_cpu_seconds": 47200.856,
+      "workspace_disk_peak_bytes": 5758058496
+    },
+    {
+      "elapsed_seconds": 4.085,
+      "max_rss_kib": 895484,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.926,
+      "user_cpu_seconds": 2.04,
+      "workspace_disk_peak_bytes": 1462272
+    },
+    {
+      "elapsed_seconds": 2.836,
+      "max_rss_kib": 1804816,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.623,
+      "user_cpu_seconds": 1.489,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.069,
+      "max_rss_kib": 113060,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.042,
+      "user_cpu_seconds": 0.042,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.067,
+      "max_rss_kib": 93736,
+      "peak_tasks_observed": 1,
+      "phase": "lean",
+      "returncode": 0,
+      "system_cpu_seconds": 0.037,
+      "user_cpu_seconds": 0.047,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.004,
+      "max_rss_kib": 13204,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 0,
+      "system_cpu_seconds": 0.002,
+      "user_cpu_seconds": 0.002,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.006,
+      "max_rss_kib": 13192,
+      "peak_tasks_observed": 1,
+      "phase": "landrun",
+      "returncode": 0,
+      "system_cpu_seconds": 0.006,
+      "user_cpu_seconds": 0.001,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.004,
+      "max_rss_kib": 13368,
+      "peak_tasks_observed": 1,
+      "phase": "touch",
+      "returncode": 1,
+      "system_cpu_seconds": 0.002,
+      "user_cpu_seconds": 0.002,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.026,
+      "max_rss_kib": 13368,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 0,
+      "system_cpu_seconds": 0.006,
+      "user_cpu_seconds": 0.02,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.025,
+      "max_rss_kib": 13368,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 0,
+      "system_cpu_seconds": 0.007,
+      "user_cpu_seconds": 0.018,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.034,
+      "max_rss_kib": 13204,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.01,
+      "user_cpu_seconds": 0.024,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.025,
+      "max_rss_kib": 13240,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.006,
+      "user_cpu_seconds": 0.019,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 0.023,
+      "max_rss_kib": 13076,
+      "peak_tasks_observed": 1,
+      "phase": "python3.11",
+      "returncode": 1,
+      "system_cpu_seconds": 0.011,
+      "user_cpu_seconds": 0.011,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 1.267,
+      "max_rss_kib": 846840,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.62,
+      "user_cpu_seconds": 0.676,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 1.263,
+      "max_rss_kib": 847372,
+      "peak_tasks_observed": 1,
+      "phase": "lake",
+      "returncode": 0,
+      "system_cpu_seconds": 0.623,
+      "user_cpu_seconds": 0.675,
+      "workspace_disk_peak_bytes": 0
+    },
+    {
+      "elapsed_seconds": 58.843,
+      "max_rss_kib": 2072480,
+      "peak_tasks_observed": 1,
+      "phase": "comparator",
+      "returncode": 0,
+      "system_cpu_seconds": 23.937,
+      "user_cpu_seconds": 110.11,
+      "workspace_disk_peak_bytes": 87113728
+    }
+  ],
+  "schema_version": 1,
+  "solution": {
+    "module": "Solution",
+    "path": "Solution.lean",
+    "sha256": "566b0d00384b55576341794fba400e34b6e55a60261a9d2880d24a058e335462"
+  },
+  "source": {
+    "bytes": 543970,
+    "commit": "82f6bb5195653b60ee05ad5c662faf4d3bae7667",
+    "repository": "samuelmasse/tuza-line-total-graphs",
+    "repository_url": "https://github.com/samuelmasse/tuza-line-total-graphs",
+    "tree_url": "https://github.com/samuelmasse/tuza-line-total-graphs/tree/82f6bb5195653b60ee05ad5c662faf4d3bae7667"
+  },
+  "stage": "complete",
+  "status": "pass",
+  "submission": {
+    "authorization": {
+      "relationship": "maintainer"
+    },
+    "requested_paths": {
+      "comparator_config_path": "comparator.json",
+      "formalization_metadata_path": "",
+      "project_path": ""
+    },
+    "submission_id": "rp7erx040zjk"
+  },
+  "warnings": [],
+  "workflow_url": "https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34193414990"
+}

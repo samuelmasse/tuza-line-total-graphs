@@ -91,8 +91,11 @@ review:
     constitute human expert review. A separate AI judgment pass checked the
     four target statements and their shared-definition trust boundary; see
     docs/statement-audit.md. Local Lean compilation and axiom audits are
-    recorded in docs/progress.md. No Comparator, NanoDa, Palomar review,
-    human expert review or novelty certification is claimed by this snapshot.
+    recorded in docs/progress.md. Palomar's Comparator check and Lean/NanoDa
+    replay accepted all four targets at commit
+    82f6bb5195653b60ee05ad5c662faf4d3bae7667. Its subsequent rendering check
+    failed before automated review; see docs/palomar-submission.md. No human
+    expert review or novelty certification is claimed.
 alignment:
   namespace: Tuza
   statements:

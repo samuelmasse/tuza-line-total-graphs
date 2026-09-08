@@ -6,7 +6,8 @@ Lean proofs of the four advertised results in the
 [seven-page paper](paper/tuza-line-total-graphs.pdf): the two universal
 inequalities, line-graph sharpness, and cubic triangle-free equality.
 Palomar verification and registration are separate from local compilation;
-see [the progress record](docs/progress.md) for the recorded status.
+see [the submission record](docs/palomar-submission.md) for the current status
+and [the progress record](docs/progress.md) for local proof checks.
 
 For a graph G, let ν(G) be the largest number of pairwise edge-disjoint
 triangles, and τ(G) the smallest number of edges meeting every triangle.

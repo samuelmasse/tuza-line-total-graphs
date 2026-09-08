@@ -20,7 +20,10 @@ finds only `propext`, `Classical.choice` and `Quot.sound` in each headline.
 The expanded [42-theorem axiom audit](completion-axiom-audit-2026-09-08.txt)
 also passed. The [statement audit](statement-audit.md) describes the precise
 scope, empty/disconnected cases and the shared-definition trust boundary.
-External Comparator, NanoDa and Palomar checks remain separate pending steps.
+Palomar's external Comparator check and both Lean and NanoDa replay passed for
+all four declarations at submitted commit `82f6bb5195653b60ee05ad5c662faf4d3bae7667`.
+The subsequent Challenge-rendering check failed before editorial review.
+See [the submission record](palomar-submission.md) for the evidence and blocker.
 
 ## Dependency plan
 
@@ -73,8 +76,9 @@ vertices and the incidence-triangle construction also compile.
 
 These initial checks are historical; the earlier failed readiness output
 documents the scaffold at the initial commit. The completion build and
-four-target readiness/axiom checks now pass. No Palomar intake, Comparator
-execution or NanoDa replay has occurred at this source snapshot.
+four-target readiness/axiom checks now pass. Subsequent Palomar intake,
+dependency repair and external verification status are recorded in
+[the submission history](palomar-submission.md).
 
 ## Trust boundary
 

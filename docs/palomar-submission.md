@@ -34,4 +34,66 @@ All mathematical source and Mathlib manifest entries are identical.
 
 The repair pins the canonical parent and retains the patched Lean 4.33.1
 kernel. CI builds from source instead of requesting the incompatible release
-cache. Validation and a new immutable submission snapshot are pending.
+cache. The [clean source CI run](https://github.com/samuelmasse/tuza-line-total-graphs/actions/runs/34191958684)
+passed, including the Challenge build, the 42-theorem axiom audit and all four
+headline proof checks. A local cache probe using the explicit Lean 4.33.1 Lake
+executable in the Mathlib root downloaded and decompressed 973 modules; the
+subsequent 1,297-job rebuild and four-target readiness check also passed.
+The repair changes no manuscript, Challenge, Solution or proof-module source.
+
+## Corrected intake
+
+After the author's explicit agreement to the corrected tuple, Palomar accepted
+a new submission at 06:08:46 UTC on 8 September 2026:
+
+- Submission: `rp7erx040zjk`.
+- Repository: `samuelmasse/tuza-line-total-graphs`.
+- Submitted commit: `82f6bb5195653b60ee05ad5c662faf4d3bae7667`.
+- Comparator configuration: `comparator.json`.
+- Declared relationship: `maintainer`.
+- [Mechanical verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34193414990): passed.
+
+The temporary verification tag and secret gist were deleted. Credentials are
+encrypted in ignored local state. The first submission remains settled and is
+not being retried. The corrected submission passed mechanical verification;
+automated review and registration are blocked by the rendering failure below.
+
+Palomar's current verifier runs a full Mathlib build during trusted dependency
+replay. The canonical-parent cache predates the retained kernel patch, so this
+can require substantially more rebuilding than the project's imported closure.
+For context, the source-identical Mathlib 4.33.1 release's
+[upstream cache-publishing run](https://github.com/leanprover-community/mathlib4/actions/runs/32480253855)
+passed, including a roughly 46-minute build and subsequent tests on upstream's
+own runners. This supports full-dependency compatibility; it is not a Palomar
+verification result or a runtime estimate for Palomar's runner.
+
+## Mechanical verification accepted
+
+Palomar recorded verification success at 10:00:19 UTC on 8 September 2026.
+The [downloaded mechanical report](palomar-mechanical-report-2026-09-08.json)
+records status `pass`, no errors and no warnings. Comparator compared all four
+advertised declarations, and both the independent NanoDa kernel and Lean's
+default kernel accepted the Solution. The report's SHA-256 is
+`14eec62004f4cd8af72fd3a495a5fc77c7b284a9a72b940435c7b29484cd5174`.
+Its recorded full-dependency replay took approximately 3 hours 40 minutes;
+the subsequent Comparator phase took approximately 59 seconds.
+
+These checks certify the encoded claims and permitted axioms. They do not
+constitute an editorial review, a novelty finding or registry publication.
+
+## Challenge rendering blocker
+
+Palomar tried the Challenge renderability check three times, starting at
+10:02:56, 11:38:49 and 13:00:10 UTC. The
+[last rendering run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34229319497)
+failed during Mathlib cache discovery. Its report records
+`palomar.render_failed`, owner `palomar`, stage `workspace`, retryable `true`
+and repairable `false`. The cache client exits before reporting any cache keys;
+its diagnostic points to the differing project and Mathlib toolchain files.
+
+The API status became `verification-error` at 13:03:37 UTC, after the successful
+mechanical result. No automated review has started, and the submission is not
+registered. Palomar's diagnostic advises retaining the submitted repository
+snapshot, retrying the same commit later, and reporting the rendering workflow
+URL if the error recurs. A report is prepared locally for the author's approval;
+no GitHub issue or message to Palomar has been sent.

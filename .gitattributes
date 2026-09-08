@@ -3,3 +3,4 @@
 # Preserve the frozen source bytes identified in docs/provenance.md.
 paper/main.tex -text
 paper/references.bib -text
+docs/palomar-mechanical-report-2026-09-08.json -text
