@@ -1,0 +1,4 @@
+scripts/CheckReady.lean:7:0: error: Missing proof declaration: Tuza.lineGraph_satisfiesTuza
+scripts/CheckReady.lean:7:0: error: Missing proof declaration: Tuza.totalGraph_satisfiesTuza
+Checked Tuza.lineGraph_factor_sharp; axioms: [propext, Classical.choice, Quot.sound]
+scripts/CheckReady.lean:7:0: error: Missing proof declaration: Tuza.cubic_triangleFree_total_parameters

@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.pdf binary
+# Preserve the frozen source bytes identified in docs/provenance.md.
+paper/main.tex -text
+paper/references.bib -text

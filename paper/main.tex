@@ -1,0 +1,482 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[expansion=false]{microtype}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Tuza's conjecture for line and total graphs},
+  pdfauthor={Samuel Mass\'{e}},
+  pdfsubject={Tuza's inequality for line graphs and total graphs},
+  pdfkeywords={triangle packing, triangle transversal, line graph, total graph}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\tri}{\triangle}
+\newcommand{\Tot}{\operatorname{Tot}}
+\newcommand{\dd}{\mathbin{\dot\cup}}
+
+\title{Tuza's conjecture for line and total graphs}
+\author{Samuel Mass\'{e}}
+\date{7 September 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+For a graph $G$, let $\nu_\tri(G)$ be the maximum number of pairwise
+edge-disjoint triangles and let $\tau_\tri(G)$ be the minimum number of edges
+meeting every triangle.  We prove $\tau_\tri(G)\leq 2\nu_\tri(G)$ when $G$ is
+the line graph or the total graph of any finite simple graph.  The proofs use
+edge-disjoint incidence cliques and a two-coloring of root edges obtained
+from Euler tours.  A local packing adjustment handles the exceptional
+Euler-tour seam for line graphs; adjoining each original vertex to the
+minority color of its incidence clique absorbs the seam for total graphs.
+The factor two is sharp over line graphs.  A sharper orientation cover gives,
+for every cubic triangle-free graph $F$, the exact identity
+$\tau_\tri(\Tot(F))=\nu_\tri(\Tot(F))=5|V(F)|/2$.
+\end{abstract}
+
+\section{Introduction}
+
+A \emph{triangle packing} in a graph $G$ is a collection of pairwise
+edge-disjoint triangles, and a \emph{triangle transversal} is a set of edges
+meeting every triangle.  Their maximum and minimum cardinalities are denoted
+by $\nu_\tri(G)$ and $\tau_\tri(G)$, respectively.  Tuza conjectured that
+\begin{equation}\label{eq:tuza}
+  \tau_\tri(G)\leq 2\nu_\tri(G)
+\end{equation}
+for every finite graph $G$ \cite{tuza1990}.
+
+We establish \eqref{eq:tuza} for two graph operators built from the incidence
+structure of a root graph.  The \emph{line graph} $L(H)$ has vertex set
+$E(H)$, with two vertices adjacent when the corresponding root edges meet.
+The \emph{total graph} $\Tot(F)$ has vertex set $V(F)\dd E(F)$; two elements
+are adjacent when they are adjacent or incident in $F$.
+
+Our main results are the following.
+
+\begin{theorem}\label{thm:line}
+If $H$ is a finite simple graph, then
+\[
+  \tau_\tri(L(H))\leq 2\nu_\tri(L(H)).
+\]
+The factor two cannot be improved over the class of line graphs.
+\end{theorem}
+
+\begin{theorem}\label{thm:total}
+If $F$ is a finite simple graph, then
+\[
+  \tau_\tri(\Tot(F))\leq 2\nu_\tri(\Tot(F)).
+\]
+\end{theorem}
+
+\begin{corollary}\label{cor:cubic}
+If $F$ is a finite simple cubic triangle-free graph, then
+\[
+  \tau_\tri(\Tot(F))=\nu_\tri(\Tot(F))=\frac52|V(F)|.
+\]
+\end{corollary}
+
+The two proofs share an edge decomposition.  Incidences at a root vertex
+induce a complete graph, and these complete graphs have pairwise disjoint
+edge sets.  Elementary complete-graph packings give local lower bounds.
+A single coloring of the root edges controls triangles that cross several
+incidence cliques.  In total graphs we also select all original root edges;
+the corresponding bridge triangles supply a compatible packing contribution.
+A balanced orientation improves this cover when the root is triangle-free.
+
+The line-graph inequality for triangle-free roots appears in
+\cite[Corollary~3.3.3]{munaro2016}; Theorem~\ref{thm:line} removes that
+hypothesis.  Nearby results establish Tuza's inequality under a maximum
+average degree bound \cite{puleo2015}; a recent preprint treats maximum
+degree at most seven \cite{gupta2026}.  Other results improve the coefficient
+for certain $K_4$-free graphs \cite{munaro2018}.  Those hypotheses do not cover
+the unbounded-degree classes considered here.  We are not aware of a previous
+statement of either theorem in the full scope given above.
+
+All graphs in the paper are finite and simple; empty and disconnected roots
+are allowed.  Simplicity ensures that two distinct root edges have at most
+one common endpoint.  The proofs construct an actual transversal $C$ and
+packing $\mathcal P$ in the same graph with $|C|\leq2|\mathcal P|$.
+No computation or exact formula for complete-graph packing numbers is needed.
+
+\section{Complete-graph tools}\label{sec:clique}
+
+For $d\geq 0$, put
+\[
+  t(d)=\binom d2-\left\lfloor\frac{d^2}{4}\right\rfloor,
+  \qquad D(d)=\nu_\tri(K_d).
+\]
+A balanced bipartition of $V(K_d)$, followed by the selection of every edge
+inside a part, gives a triangle transversal of size $t(d)$.  Explicitly,
+\begin{equation}\label{eq:t-values}
+  t(2r)=r(r-1),\qquad t(2r+1)=r^2.
+\end{equation}
+
+We use the following elementary lower bounds on $D(d)$.  The basic
+complete-graph inequality is classical; compare the construction attributed
+to Seb\H{o} in \cite[Theorem~3.3.2]{munaro2016}.  We include a proof to make
+the additional even-order slack explicit.
+
+\begin{lemma}[Local clique slack]\label{lem:clique}
+For every integer $d\geq 0$,
+\begin{equation}\label{eq:basic-slack}
+  t(d)\leq 2D(d).
+\end{equation}
+If $d\geq 6$ is even, then
+\begin{equation}\label{eq:even-slack}
+  t(d)+2\leq 2D(d).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+First suppose that $d=2r$.  Split the vertices into sets $A$ and $B$ of size
+$r$.  Properly edge-color $K_A$ with at most $r$ colors and index the colors
+by vertices of $B$.  For every edge $xy$ of color $b$, take the triangle
+$bxy$.  Each color class is a matching, so the resulting $\binom r2=t(d)/2$
+triangles are edge-disjoint.  If $r\geq 3$, all edges inside $B$ remain
+unused, and we may add one triangle on $B$.  This proves both claims for even
+$d$.  The required edge coloring follows, for example, from the standard
+round-robin one-factorization or near-one-factorization of a complete graph.
+
+Now let $d=2r+1$, with $|A|=r+1$ and $|B|=r$.  If $r$ is odd, a
+one-factorization of the even-order clique $K_A$ has $r$ factors.  Indexing
+them by $B$ and adjoining the index vertex to every factor edge gives
+$r(r+1)/2$ edge-disjoint triangles.  If $r$ is even, use the $r+1$
+near-one-factors of the odd-order clique $K_A$, delete one factor, and index
+the remaining $r$ factors by $B$.  This gives $r^2/2$ edge-disjoint
+triangles.  In either case twice the number obtained is at least $r^2=t(d)$.
+The cases $d\leq 2$ are immediate.
+\end{proof}
+
+\section{Line graphs}\label{sec:line}
+
+Let $H$ be a finite simple graph.  For $v\in V(H)$, let $W_v$ be the set of
+edges of $L(H)$ corresponding to unordered pairs of distinct root edges
+incident with $v$.  Two adjacent edges of a simple graph have a unique common
+endpoint, and hence
+\begin{equation}\label{eq:wedge-partition}
+  E(L(H))=\mathop{\dd}_{v\in V(H)}W_v.
+\end{equation}
+We call $W_v$ the \emph{wedge packet} at $v$.
+
+\begin{lemma}[Line-graph triangle classification]\label{lem:line-class}
+Every triangle of $L(H)$ is exactly one of the following:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item a star triangle formed by three root edges incident with one vertex
+        $v$, whose three edges all belong to $W_v$;
+  \item a root triangle formed by the three edges of a triangle $xyz$ in
+        $H$, with one edge in each of $W_x,W_y,W_z$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Three distinct pairwise intersecting two-element sets either have a common
+element or are $\{x,y\},\{x,z\},\{y,z\}$.  Applied to three pairwise adjacent
+root edges, these are precisely the two stated cases.
+\end{proof}
+
+The star triangles in $W_v$ form the triangle system of $K_{d_H(v)}$.
+Choose $D(d_H(v))$ edge-disjoint star triangles at every root vertex.  The
+packet partition \eqref{eq:wedge-partition} shows that their union is a
+packing of size
+\begin{equation}\label{eq:line-packing}
+  P_0=\sum_{v\in V(H)}D(d_H(v)).
+\end{equation}
+Write
+\begin{equation}\label{eq:line-T}
+  T=\sum_{v\in V(H)}t(d_H(v)).
+\end{equation}
+Lemma~\ref{lem:clique} gives $T\leq 2P_0$.
+
+The cover uses a balanced red-blue coloring of the root edges.  We isolate
+the required form.
+
+\begin{lemma}[Alternating Euler coloring]\label{lem:euler-color}
+Let $K$ be a connected graph.
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item If $K$ has an odd-degree vertex, its edges can be colored red and blue
+        so that the two color degrees are equal at every even-degree vertex
+        and differ by one at every odd-degree vertex.
+  \item If every degree of $K$ is even and $|E(K)|$ is even, the two color
+        degrees can be made equal at every vertex.
+  \item If every degree of $K$ is even and $|E(K)|$ is odd, the two color
+        degrees can be made equal except at one chosen seam vertex, where they
+        differ by two.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (a), add a new dummy vertex adjacent to every odd-degree vertex.  The
+augmented graph is connected and Eulerian.  Start an Euler tour at the dummy
+vertex and color successive tour edges alternately.  At every original vertex
+the tour edges pair into differently colored entering and leaving edges.  Any
+odd cyclic seam occurs at the dummy vertex.  After deleting the dummy edges,
+the stated balances remain.
+
+For (b) and (c), an isolated vertex needs no coloring.  Otherwise alternately
+color an Euler tour of $K$.  If the tour length is even, every visit pairs two
+different colors.  If it is odd, the first and
+last edges have the same color and the unique discrepancy of two occurs at
+the starting vertex.
+\end{proof}
+
+Given such a coloring, select in $W_v$ every wedge whose two root edges have
+the same color.  Every star triangle is hit by the pigeonhole principle.
+Every root triangle is hit because two of its three root edges have the
+same color.  If the red and blue degrees at $v$ are $a$ and $b$, the local
+cost is
+\[
+  \binom a2+\binom b2.
+\]
+By \eqref{eq:t-values}, this equals $t(d_H(v))$ when an even degree is
+balanced or an odd degree differs by one.  At a difference-two even degree it
+equals $t(d_H(v))+1$.
+
+Consequently, every connected component has a cover of cost at most its
+contribution to $T$, except possibly a connected Eulerian component with an
+odd number of edges.  Such a component has a cover with one extra edge.  The
+following lemma absorbs this unique surcharge.
+
+\begin{lemma}[Odd Eulerian seam repair]\label{lem:seam}
+Let $K$ be a connected Eulerian component of $H$ with an odd number of edges.
+Put
+\[
+  T_K=\sum_{v\in V(K)}t(d_H(v)),\qquad
+  P_K=\sum_{v\in V(K)}D(d_H(v)).
+\]
+There is a triangle transversal $C_K$ of $L(K)$ and a triangle packing
+$\mathcal P_K$ in $L(K)$ such that $|C_K|\leq 2|\mathcal P_K|$.
+\end{lemma}
+
+\begin{proof}
+The alternating Euler cover has size at most $T_K+1$.  We distinguish three
+exhaustive cases.
+
+If some vertex has degree at least six, its degree is even and
+\eqref{eq:even-slack} supplies two units of local packing slack.  Together
+with \eqref{eq:basic-slack} at every other vertex, this gives
+$T_K+1\leq 2P_K$.
+
+Suppose next that $K$ is triangle-free.  Discard the global coloring.  At
+each vertex, split its incident root edges into two equal parts and select the
+wedges lying inside a part.  Since there are no root triangles, these
+local selections cover every triangle and have total size exactly $T_K$.
+Thus $T_K\leq 2P_K$.
+
+It remains that every positive degree is two or four and that $K$ contains a
+root triangle $xyz$.  Keep the alternating Euler cover of size at most
+$T_K+1$.  At a degree-two vertex the local packing is empty.  At a
+degree-four vertex, $D(4)=1$, and a triangle of the local $K_4$ can avoid any
+one prescribed wedge: if that wedge is $ab$, take the triangle on
+$\{a,c,d\}$.  We may therefore choose the local maximum packings at
+$x,y,z$ to avoid, independently, the three wedges of the triangle in $L(K)$
+corresponding to $xyz$.  Adding it to the local packing gives a packing of size
+$P_K+1$.  Hence
+\[
+  T_K+1\leq 2P_K+1\leq 2(P_K+1).
+\]
+
+These cases are exhaustive because, in the absence of a degree at least six,
+Eulerianity forces every positive degree to be two or four, after which the
+component is either triangle-free or contains a root triangle.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:line}]
+Apply the alternating Euler cover to every component not requiring the seam
+repair, and Lemma~\ref{lem:seam} to every connected Eulerian odd-edge
+component.  Line graphs and their triangle systems are disjoint across root
+components, so the component covers and packings may be united.  This proves
+$\tau_\tri(L(H))\leq2\nu_\tri(L(H))$.
+
+For sharpness, $L(K_{1,4})\cong K_4$ has
+$(\nu_\tri,\tau_\tri)=(1,2)$.  Indeed, every two of its triangles share an
+edge, one edge cannot meet all four triangles, and two opposite edges do.
+\end{proof}
+
+\begin{remark}
+The quantifier in Lemma~\ref{lem:seam} is one surcharge per connected
+Eulerian odd-edge component, not per block, root triangle, or high-degree
+vertex.  Odd cycles show why the triangle-free branch must discard the Euler
+seam rather than charge it to a nonexistent local packing.
+\end{remark}
+
+\section{Total graphs}\label{sec:total}
+
+Let $F$ be a finite simple graph.  Write
+\[
+  d_v=d_F(v),\qquad m=|E(F)|,
+  \qquad o=|\{v\in V(F):d_v\text{ is odd}\}|.
+\]
+For every $v\in V(F)$, put
+\[
+  Q_v=\{v\}\cup\delta_F(v),
+\]
+where an edge in $\delta_F(v)$ is regarded as its edge-vertex in the total
+graph.  The set $Q_v$ induces $K_{d_v+1}$.  Its edges are the incidence
+edges from $v$ to its incident edge-vertices and the wedge edges between
+pairs of root edges meeting at $v$.  These packet edge sets are pairwise
+disjoint.  Original root edges lie outside all of them.
+For a root edge $uv$, let $B_{uv}=\{u,uv,v\}$ be its \emph{bridge triangle};
+here $uv$ inside the vertex set denotes the edge-vertex.
+
+\begin{lemma}[Total-graph triangle classification]\label{lem:total-class}
+A triangle of $\Tot(F)$ has one of the following forms, according to its
+number of original vertices:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item three original vertices forming a triangle of $F$;
+  \item two original vertices and their joining edge-vertex, forming $B_{uv}$;
+  \item one original vertex $v$ and two edge-vertices incident with $v$,
+        all in $Q_v$;
+  \item three edge-vertices whose root edges either share an endpoint
+        or form a triangle of $F$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The first case follows from adjacency of original vertices.  In the second,
+an edge-vertex adjacent to both $u$ and $v$ must be $uv$.  In the third, both
+edge-vertices must be incident with the original vertex.  The fourth follows
+from the pairwise-intersecting 2-subset argument of
+Lemma~\ref{lem:line-class}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:total}]
+Apply Lemma~\ref{lem:euler-color} componentwise to color the root edges red
+and blue.  At every odd-degree vertex the color degrees differ by one, and
+at every even-degree vertex they differ by at most two.
+
+In each $Q_v$, retain these colors on the edge-vertices and color the original
+vertex $v$ with the less frequent color, breaking ties arbitrarily.  Adding
+one vertex to the minority side changes a discrepancy of zero, one, or two
+into one, zero, or one, respectively.  Thus $Q_v$ is balanced and its
+within-color edges number exactly $t(d_v+1)$.
+
+Let $C$ consist of these within-color edges in every $Q_v$, together with
+all $m$ original root edges.  We check the complete triangle list of
+Lemma~\ref{lem:total-class}.  Triangles of the first two types have a selected
+original edge.  Those of the third type and the common-endpoint subcase of
+the fourth lie in a packet and have a same-color pair.  In the remaining
+subcase, two of the three root edges have the same global color, so their
+joining wedge is selected in their common endpoint's packet.  Hence $C$ is
+a triangle transversal.  Since the packet edge sets are disjoint and contain
+no original root edges,
+\begin{equation}\label{eq:all-total-cover}
+  |C|=m+\sum_v t(d_v+1).
+\end{equation}
+
+For a packing, take all $m$ bridge triangles and, at each $v$, a packing of
+$D(d_v)$ triangles among the edge-vertices in $\delta_F(v)$.  Distinct bridges
+use distinct original and incidence edges.  The additional triangles use
+only wedge edges, whose packets are mutually disjoint.  Thus their union is
+one packing $\mathcal P$ of size
+\begin{equation}\label{eq:total-packing}
+  |\mathcal P|=m+\sum_vD(d_v)\leq\nu_\tri(\Tot(F)).
+\end{equation}
+The identities
+\begin{equation}\label{eq:parity-identities}
+  t(d+1)-t(d)=\left\lfloor\frac d2\right\rfloor,
+  \qquad
+  \sum_v\left\lfloor\frac{d_v}{2}\right\rfloor=m-\frac o2
+\end{equation}
+follow from \eqref{eq:t-values} and the degree sum.  Therefore
+\[
+  \tau_\tri(\Tot(F))\leq |C|
+  =2m+\sum_vt(d_v)-\frac o2
+  \leq 2|\mathcal P|-\frac o2
+  \leq 2\nu_\tri(\Tot(F)),
+\]
+where the penultimate inequality is Lemma~\ref{lem:clique}.
+\end{proof}
+
+\section{A sharper cover for triangle-free roots}\label{sec:triangle-free}
+
+When $F$ is triangle-free, only packet triangles and bridges occur.  We can
+then replace the $m$ selected original edges by a more economical choice.
+
+\begin{proposition}\label{prop:tf-cover}
+For every finite simple triangle-free graph $F$,
+\begin{equation}\label{eq:total-cover}
+  \tau_\tri(\Tot(F))\leq\sum_v t(d_v+1)+\frac o2
+  =m+\sum_vt(d_v).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Every graph admits an orientation in which the indegree and outdegree at each
+vertex differ by at most one: add a dummy vertex adjacent to all odd-degree
+vertices, orient Euler tours cyclically, and delete the dummy edges.  Fix
+such an orientation of $F$.
+
+At an even-degree vertex, place $v$ and all incoming edge-vertices in one side
+of a balanced bipartition of $Q_v$.  Do the same at an odd-degree vertex of
+indegree $(d_v-1)/2$.  At an odd-degree vertex of indegree $(d_v+1)/2$, move
+one incoming edge-vertex to the other side, so the two sides are balanced.
+Select all edges lying inside a part.  This covers every local triangle and
+uses exactly $t(d_v+1)$ edges in $Q_v$.
+
+For an oriented root edge $uv$ directed toward $v$, the bridge $B_{uv}$ is
+hit by its incidence edge $v(uv)$ unless $uv$ is the one incoming edge moved
+at a high-indegree odd vertex.  In that exceptional case, select the original
+edge $uv$.  These additional edges are distinct because every oriented edge
+has a unique head.
+
+Exactly $o/2$ odd vertices have high indegree: the sum of all indegrees is
+$m$, whereas the sum of their lower permitted values is $m-o/2$ by
+\eqref{eq:parity-identities}.  Hence the constructed transversal has
+$\sum_vt(d_v+1)+o/2$ edges.  The other identity in
+\eqref{eq:parity-identities} gives the final equality in
+\eqref{eq:total-cover}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:cubic}]
+Put $n=|V(F)|$.  Then $m=3n/2$ and $D(3)=1$, so the packing in
+\eqref{eq:total-packing} has $3n/2+n=5n/2$ triangles.
+Proposition~\ref{prop:tf-cover} supplies a transversal of size
+$m+n\,t(3)=3n/2+n=5n/2$.  Since every transversal contains a distinct edge
+for each member of an edge-disjoint packing,
+\[
+  \frac{5n}{2}\leq\nu_\tri(\Tot(F))
+  \leq\tau_\tri(\Tot(F))\leq\frac{5n}{2}.\qedhere
+\]
+\end{proof}
+
+\section{Concluding remarks}
+
+The two operator classes permit globally compatible certificates because
+adjacent root edges have a unique common endpoint.  In line graphs, the
+only possible loss in an Euler coloring is one extra selected wedge per
+connected Eulerian component with an odd number of edges.  In total graphs,
+the original vertex balances its enlarged incidence clique, while bridge
+triangles pay for the selection of original root edges.
+
+The factor two is sharp for line graphs.  We do not determine the best
+factor for total graphs, although the cubic triangle-free case has equality
+between packing and transversal numbers.  Extensions to multigraph roots,
+generalized line graphs, or quasi-line graphs require additional arguments
+and are not claimed here.
+
+\paragraph{AI assistance.}
+The author acknowledges the assistance of OpenAI's GPT-6 Astra in developing
+the proofs, checking arguments, searching the literature, and preparing the
+exposition.  The proofs are
+self-contained; computational checks are not premises of the theorems.
+
+\bibliographystyle{plain}
+\begingroup
+\raggedright
+\bibliography{references}
+\endgroup
+
+\end{document}

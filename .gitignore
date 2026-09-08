@@ -1,0 +1,12 @@
+.lake/
+.elan/
+.DS_Store
+Thumbs.db
+__pycache__/
+.venv/
+tmp/
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
