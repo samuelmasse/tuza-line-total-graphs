@@ -27,7 +27,7 @@
 
 \title{Tuza's conjecture for line and total graphs}
 \author{Samuel Mass\'{e}}
-\date{7 September 2026}
+\date{11 September 2026}
 
 \begin{document}
 
@@ -42,9 +42,12 @@ edge-disjoint incidence cliques and a two-coloring of root edges obtained
 from Euler tours.  A local packing adjustment handles the exceptional
 Euler-tour seam for line graphs; adjoining each original vertex to the
 minority color of its incidence clique absorbs the seam for total graphs.
-The factor two is sharp over line graphs.  A sharper orientation cover gives,
-for every cubic triangle-free graph $F$, the exact identity
+The factor two is sharp over line graphs.  A cover constructed from distinct
+incident-edge representatives gives, for every cubic triangle-free graph $F$,
+the exact identity
 $\tau_\tri(\Tot(F))=\nu_\tri(\Tot(F))=5|V(F)|/2$.
+The proof constructions presented here follow the accompanying Lean
+formalization, including its explicit finite clique-packing certificates.
 \end{abstract}
 
 \section{Introduction}
@@ -94,7 +97,7 @@ edge sets.  Elementary complete-graph packings give local lower bounds.
 A single coloring of the root edges controls triangles that cross several
 incidence cliques.  In total graphs we also select all original root edges;
 the corresponding bridge triangles supply a compatible packing contribution.
-A balanced orientation improves this cover when the root is triangle-free.
+A Hall assignment gives a sharp cover when the root is cubic and triangle-free.
 
 The line-graph inequality for triangle-free roots appears in
 \cite[Corollary~3.3.3]{munaro2016}; Theorem~\ref{thm:line} removes that
@@ -109,7 +112,11 @@ All graphs in the paper are finite and simple; empty and disconnected roots
 are allowed.  Simplicity ensures that two distinct root edges have at most
 one common endpoint.  The proofs construct an actual transversal $C$ and
 packing $\mathcal P$ in the same graph with $|C|\leq2|\mathcal P|$.
-No computation or exact formula for complete-graph packing numbers is needed.
+The complete-graph bound uses a three-part construction and strong induction,
+with explicit certificates for orders below 21.  These finite certificates
+are checked by Lean's kernel; no exact formula for complete-graph packing
+numbers is assumed.  The results concern the two stated graph classes and
+do not resolve Tuza's conjecture for arbitrary graphs.
 
 \section{Complete-graph tools}\label{sec:clique}
 
@@ -126,8 +133,9 @@ inside a part, gives a triangle transversal of size $t(d)$.  Explicitly,
 
 We use the following elementary lower bounds on $D(d)$.  The basic
 complete-graph inequality is classical; compare the construction attributed
-to Seb\H{o} in \cite[Theorem~3.3.2]{munaro2016}.  We include a proof to make
-the additional even-order slack explicit.
+to Seb\H{o} in \cite[Theorem~3.3.2]{munaro2016}.  The following proof uses the
+same Latin-square recurrence and finite bases as the Lean development and
+supplies the additional even-order slack.
 
 \begin{lemma}[Local clique slack]\label{lem:clique}
 For every integer $d\geq 0$,
@@ -141,23 +149,73 @@ If $d\geq 6$ is even, then
 \end{lemma}
 
 \begin{proof}
-First suppose that $d=2r$.  Split the vertices into sets $A$ and $B$ of size
-$r$.  Properly edge-color $K_A$ with at most $r$ colors and index the colors
-by vertices of $B$.  For every edge $xy$ of color $b$, take the triangle
-$bxy$.  Each color class is a matching, so the resulting $\binom r2=t(d)/2$
-triangles are edge-disjoint.  If $r\geq 3$, all edges inside $B$ remain
-unused, and we may add one triangle on $B$.  This proves both claims for even
-$d$.  The required edge coloring follows, for example, from the standard
-round-robin one-factorization or near-one-factorization of a complete graph.
+For $q>0$, partition $3q$ vertices into three copies $A,B,C$ of
+$\mathbb Z/q\mathbb Z$.  Take the $q^2$ triangles
+\[
+  \{a_A,b_B,(a+b)_C\},\qquad a,b\in\mathbb Z/q\mathbb Z.
+\]
+Any two coordinates determine the third, so distinct triangles share at
+most one vertex.  They use only edges between parts.  Adding a maximum
+packing inside each of $A,B,C$ therefore gives
+\begin{equation}\label{eq:latin-recurrence}
+  D(3q)\geq q^2+3D(q).
+\end{equation}
+Also, $D(a)\leq D(b)$ for $a\leq b$, by embedding $K_a$ into $K_b$.
 
-Now let $d=2r+1$, with $|A|=r+1$ and $|B|=r$.  If $r$ is odd, a
-one-factorization of the even-order clique $K_A$ has $r$ factors.  Indexing
-them by $B$ and adjoining the index vertex to every factor edge gives
-$r(r+1)/2$ edge-disjoint triangles.  If $r$ is even, use the $r+1$
-near-one-factors of the odd-order clique $K_A$, delete one factor, and index
-the remaining $r$ factors by $B$.  This gives $r^2/2$ edge-disjoint
-triangles.  In either case twice the number obtained is at least $r^2=t(d)$.
-The cases $d\leq 2$ are immediate.
+For completeness, the following describes precisely the finite witnesses
+used for $0\leq n<21$, on vertices $0,\ldots,n-1$.  Use the empty list
+for $n\leq2$.  For $n\geq3$, put $r=\lfloor n/2\rfloor$ and begin with
+\[
+  \bigl\{\{i,j,r+((i+j)\bmod r)\}:0\leq i<j<r\bigr\}.
+\]
+If $n=2r\geq6$, add $\{r,r+1,r+2\}$.  If $n=2r+1$, add
+\[
+  \{2r,i,r+((2i)\bmod r)\}\quad (i\in I_r),\qquad
+  I_r=\begin{cases}
+    \{0,\ldots,r-1\},&r\text{ odd},\\
+    \{0,\ldots,r/2-1\},&r\text{ even}.
+  \end{cases}
+\]
+Each listed set has three distinct vertices.  For the initial triangles,
+sharing a vertex in each of the two halves forces the remaining index to
+agree.  The extra even-order triangle uses only edges in the second half.
+For odd orders, multiplication by two is injective on $I_r$ modulo $r$;
+moreover, an initial triangle containing $i$ cannot also contain
+$r+((2i)\bmod r)$, since its other first-half index would then equal $i$.
+Thus every pair of distinct listed triangles shares at most one vertex.
+Their sizes $p_n$ are
+\[
+\begin{array}{c|rrrrrrrrrrr}
+n&0&1&2&3&4&5&6&7&8&9&10\\\hline
+p_n&0&0&0&1&1&2&4&6&7&8&11
+\end{array}
+\]
+and
+\[
+\begin{array}{c|rrrrrrrrrr}
+n&11&12&13&14&15&16&17&18&19&20\\\hline
+p_n&15&16&18&22&28&29&32&37&45&46
+\end{array}
+\]
+Direct substitution verifies $t(n)\leq2p_n$ and, for even $n\geq6$,
+$t(n)+2\leq2p_n$.  The formal proof checks the same literal lists for
+three-element cardinality, pairwise intersection size at most one, and
+these numerical bounds.
+
+Proceed by strong induction.  For $n\geq21$, write $n=3q+s$ with
+$q\geq7$ and $0\leq s<3$.  The function $t$ is nondecreasing, and
+\begin{equation}\label{eq:latin-arithmetic}
+  t(3q+s)+2\leq2q^2+3t(q).
+\end{equation}
+Indeed it suffices to take $s=2$.  When $q=2r$, the right side minus
+the left side is $2r^2-6r-2\geq0$ for $r\geq4$; when $q=2r+1$, it
+is $2r^2-4r-4\geq0$ for $r\geq3$.  The induction hypothesis,
+\eqref{eq:latin-recurrence}, and monotonicity now give
+\[
+  t(n)+2\leq2q^2+3t(q)
+  \leq2\bigl(q^2+3D(q)\bigr)\leq2D(3q)\leq2D(n).
+\]
+This proves both assertions, including the required even-order slack.
 \end{proof}
 
 \section{Line graphs}\label{sec:line}
@@ -171,6 +229,7 @@ endpoint, and hence
 \end{equation}
 We call $W_v$ the \emph{wedge packet} at $v$.
 
+\newpage
 \begin{lemma}[Line-graph triangle classification]\label{lem:line-class}
 Every triangle of $L(H)$ is exactly one of the following:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -316,41 +375,20 @@ seam rather than charge it to a nonexistent local packing.
 
 Let $F$ be a finite simple graph.  Write
 \[
-  d_v=d_F(v),\qquad m=|E(F)|,
-  \qquad o=|\{v\in V(F):d_v\text{ is odd}\}|.
+  d_v=d_F(v),\qquad m=|E(F)|.
 \]
 For every $v\in V(F)$, put
 \[
   Q_v=\{v\}\cup\delta_F(v),
 \]
-where an edge in $\delta_F(v)$ is regarded as its edge-vertex in the total
+where $\delta_F(v)$ is the set of root edges incident with $v$, and an edge
+in this set is regarded as its edge-vertex in the total
 graph.  The set $Q_v$ induces $K_{d_v+1}$.  Its edges are the incidence
 edges from $v$ to its incident edge-vertices and the wedge edges between
 pairs of root edges meeting at $v$.  These packet edge sets are pairwise
 disjoint.  Original root edges lie outside all of them.
 For a root edge $uv$, let $B_{uv}=\{u,uv,v\}$ be its \emph{bridge triangle};
 here $uv$ inside the vertex set denotes the edge-vertex.
-
-\begin{lemma}[Total-graph triangle classification]\label{lem:total-class}
-A triangle of $\Tot(F)$ has one of the following forms, according to its
-number of original vertices:
-\begin{enumerate}[label=\textup{(\roman*)}]
-  \item three original vertices forming a triangle of $F$;
-  \item two original vertices and their joining edge-vertex, forming $B_{uv}$;
-  \item one original vertex $v$ and two edge-vertices incident with $v$,
-        all in $Q_v$;
-  \item three edge-vertices whose root edges either share an endpoint
-        or form a triangle of $F$.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-The first case follows from adjacency of original vertices.  In the second,
-an edge-vertex adjacent to both $u$ and $v$ must be $uv$.  In the third, both
-edge-vertices must be incident with the original vertex.  The fourth follows
-from the pairwise-intersecting 2-subset argument of
-Lemma~\ref{lem:line-class}.
-\end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:total}]
 Apply Lemma~\ref{lem:euler-color} componentwise to color the root edges red
@@ -364,16 +402,17 @@ into one, zero, or one, respectively.  Thus $Q_v$ is balanced and its
 within-color edges number exactly $t(d_v+1)$.
 
 Let $C$ consist of these within-color edges in every $Q_v$, together with
-all $m$ original root edges.  We check the complete triangle list of
-Lemma~\ref{lem:total-class}.  Triangles of the first two types have a selected
-original edge.  Those of the third type and the common-endpoint subcase of
-the fourth lie in a packet and have a same-color pair.  In the remaining
-subcase, two of the three root edges have the same global color, so their
-joining wedge is selected in their common endpoint's packet.  Hence $C$ is
-a triangle transversal.  Since the packet edge sets are disjoint and contain
-no original root edges,
+all $m$ original root edges.  This gives a single red-blue coloring of all
+vertices of $\Tot(F)$: each edge-vertex keeps its root-edge color, and
+each original vertex has its chosen minority color.  Every monochromatic
+edge of $\Tot(F)$ belongs to $C$.  Indeed, an original-original edge was
+selected outright, an incidence edge belongs to its original vertex's
+packet, and a wedge belongs to the packet at the unique common root
+endpoint.  Every triangle has a monochromatic edge by the pigeonhole
+principle, so $C$ is a triangle transversal.  Counting the packet
+contributions and original edges gives
 \begin{equation}\label{eq:all-total-cover}
-  |C|=m+\sum_v t(d_v+1).
+  |C|\leq m+\sum_v t(d_v+1).
 \end{equation}
 
 For a packing, take all $m$ bridge triangles and, at each $v$, a packing of
@@ -384,73 +423,113 @@ one packing $\mathcal P$ of size
 \begin{equation}\label{eq:total-packing}
   |\mathcal P|=m+\sum_vD(d_v)\leq\nu_\tri(\Tot(F)).
 \end{equation}
-The identities
+The identity and degree-sum bound
 \begin{equation}\label{eq:parity-identities}
   t(d+1)-t(d)=\left\lfloor\frac d2\right\rfloor,
   \qquad
-  \sum_v\left\lfloor\frac{d_v}{2}\right\rfloor=m-\frac o2
+  \sum_v\left\lfloor\frac{d_v}{2}\right\rfloor\leq m
 \end{equation}
 follow from \eqref{eq:t-values} and the degree sum.  Therefore
 \[
   \tau_\tri(\Tot(F))\leq |C|
-  =2m+\sum_vt(d_v)-\frac o2
-  \leq 2|\mathcal P|-\frac o2
+  \leq 2m+\sum_vt(d_v)
+  \leq 2|\mathcal P|
   \leq 2\nu_\tri(\Tot(F)),
 \]
 where the penultimate inequality is Lemma~\ref{lem:clique}.
 \end{proof}
 
-\section{A sharper cover for triangle-free roots}\label{sec:triangle-free}
+\section{Cubic triangle-free roots}\label{sec:triangle-free}
 
-When $F$ is triangle-free, only packet triangles and bridges occur.  We can
-then replace the $m$ selected original edges by a more economical choice.
+For a cubic triangle-free root, a distinct choice of one incident edge at
+each vertex gives a smaller cover.  We first prove the assignment used in
+the formal development.
 
-\begin{proposition}\label{prop:tf-cover}
-For every finite simple triangle-free graph $F$,
-\begin{equation}\label{eq:total-cover}
-  \tau_\tri(\Tot(F))\leq\sum_v t(d_v+1)+\frac o2
-  =m+\sum_vt(d_v).
-\end{equation}
-\end{proposition}
+\begin{lemma}[Distinct incident-edge representatives]\label{lem:hall}
+If a finite simple graph $F$ has minimum degree at least two, there is an
+injective map $p:V(F)\longrightarrow E(F)$ such that $p(v)$ is incident
+with $v$ for every vertex $v$.
+\end{lemma}
 
 \begin{proof}
-Every graph admits an orientation in which the indegree and outdegree at each
-vertex differ by at most one: add a dummy vertex adjacent to all odd-degree
-vertices, orient Euler tours cyclically, and delete the dummy edges.  Fix
-such an orientation of $F$.
-
-At an even-degree vertex, place $v$ and all incoming edge-vertices in one side
-of a balanced bipartition of $Q_v$.  Do the same at an odd-degree vertex of
-indegree $(d_v-1)/2$.  At an odd-degree vertex of indegree $(d_v+1)/2$, move
-one incoming edge-vertex to the other side, so the two sides are balanced.
-Select all edges lying inside a part.  This covers every local triangle and
-uses exactly $t(d_v+1)$ edges in $Q_v$.
-
-For an oriented root edge $uv$ directed toward $v$, the bridge $B_{uv}$ is
-hit by its incidence edge $v(uv)$ unless $uv$ is the one incoming edge moved
-at a high-indegree odd vertex.  In that exceptional case, select the original
-edge $uv$.  These additional edges are distinct because every oriented edge
-has a unique head.
-
-Exactly $o/2$ odd vertices have high indegree: the sum of all indegrees is
-$m$, whereas the sum of their lower permitted values is $m-o/2$ by
-\eqref{eq:parity-identities}.  Hence the constructed transversal has
-$\sum_vt(d_v+1)+o/2$ edges.  The other identity in
-\eqref{eq:parity-identities} gives the final equality in
-\eqref{eq:total-cover}.
+Apply Hall's theorem to the vertex-edge incidence bipartite graph.  For
+$S\subseteq V(F)$, let $N(S)$ consist of the root edges incident with at
+least one vertex of $S$.  Counting incidences gives
+\[
+  2|S|\leq\sum_{v\in S}d_F(v)\leq2|N(S)|,
+\]
+because a root edge has at most two endpoints in $S$.  Hence
+$|S|\leq|N(S)|$ for every $S$, which is precisely Hall's condition.
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:cubic}]
 Put $n=|V(F)|$.  Then $m=3n/2$ and $D(3)=1$, so the packing in
 \eqref{eq:total-packing} has $3n/2+n=5n/2$ triangles.
-Proposition~\ref{prop:tf-cover} supplies a transversal of size
-$m+n\,t(3)=3n/2+n=5n/2$.  Since every transversal contains a distinct edge
-for each member of an edge-disjoint packing,
+
+Choose $p$ by Lemma~\ref{lem:hall}.  At each $v$, write its three incident
+edges as $p(v),a_v,b_v$.  In the packet $Q_v\cong K_4$, select the
+incidence edge $v\,p(v)$ and the wedge $a_vb_v$.  These two edges form a
+perfect matching of $Q_v$, so every triangle in the packet meets one of
+them.  Also select every original edge outside $p(V(F))$.
+
+For a bridge $B_e$, if $e=p(v)$ for some $v$, its selected incidence edge
+$v\,p(v)$ meets the bridge; otherwise its original edge is selected.
+Since $F$ is triangle-free, every total triangle is a packet triangle or a
+bridge.  To see this directly, three original vertices would give a root
+triangle; two original vertices force their joining edge-vertex; one
+original vertex forces the other two edge-vertices into its packet; and
+three edge-vertices are classified by Lemma~\ref{lem:line-class}, whose
+root-triangle case is excluded.  This is the same case analysis used in
+the formal cover proof.  The selection is therefore a transversal.  Its
+size is at most
+\[
+  2n+\bigl(m-|p(V(F))|\bigr)=2n+(m-n)=m+n=5n/2,
+\]
+using the injectivity of $p$.  Finally, every transversal contains a
+distinct edge for each member of an edge-disjoint packing, so
 \[
   \frac{5n}{2}\leq\nu_\tri(\Tot(F))
   \leq\tau_\tri(\Tot(F))\leq\frac{5n}{2}.\qedhere
 \]
 \end{proof}
+
+\section{Formal verification}\label{sec:formal}
+
+The accompanying \href{https://github.com/samuelmasse/tuza-line-total-graphs}
+{Lean repository} implements the constructions presented above.  The local
+clique proof uses the Latin packing, the same finite lists for orders below
+21, and the same strong-induction inequality.  The line and total proofs
+use the Euler colorings, packet unions and seam repair described here;
+the cubic cover uses the incident-edge assignment of Lemma~\ref{lem:hall}.
+The earlier balanced-orientation refinement is retained in a separate
+informal note in the repository and is not a result of this revised paper.
+
+The four headline declarations are
+\begin{center}
+\small
+\begin{tabular}{ll}
+Theorem~\ref{thm:line} & \texttt{Tuza.lineGraph\_satisfiesTuza}\\
+Line-graph sharpness & \texttt{Tuza.lineGraph\_factor\_sharp}\\
+Theorem~\ref{thm:total} & \texttt{Tuza.totalGraph\_satisfiesTuza}\\
+Corollary~\ref{cor:cubic} & \texttt{Tuza.cubic\_triangleFree\_total\_parameters}
+\end{tabular}
+\end{center}
+The formal graph definitions use ordinary finite simple graphs, edge-disjoint
+triangle packings and edge transversals.  Empty and disconnected roots are
+included.  The cubic conclusion uses the equivalent natural-number identities
+$2\tau_\tri=5|V(F)|$ and $2\nu_\tri=5|V(F)|$.
+
+At source commit \texttt{82f6bb5}, using Lean 4.33.1 and the pinned Mathlib
+dependency, all four declarations passed
+\href{https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34193414990}
+{Palomar's Comparator check and replay by Lean and NanoDa}.
+Only propositional extensionality, classical choice and quotient soundness
+occur in the audited axioms.  The deliberately incomplete Challenge
+statements are separate from the completed Solution proofs.  A detailed
+proof-to-declaration map and full commit identifiers are provided in the
+repository.  That mechanical run checked the Lean sources before this
+expository revision; it did not review this revised manuscript, establish
+novelty, or constitute human expert review or completed registration.
 
 \section{Concluding remarks}
 
@@ -469,9 +548,11 @@ and are not claimed here.
 
 \paragraph{AI assistance.}
 The author acknowledges the assistance of OpenAI's GPT-6 Astra in developing
-the proofs, checking arguments, searching the literature, and preparing the
-exposition.  The proofs are
-self-contained; computational checks are not premises of the theorems.
+the proofs, checking arguments, searching the literature, preparing the
+exposition, and constructing the Lean formalization.  The finite clique
+certificates are part of the proof and are checked by Lean's kernel;
+exploratory computations and bounded graph tests are not premises of the
+universal results.
 
 \bibliographystyle{plain}
 \begingroup

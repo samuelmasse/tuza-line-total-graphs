@@ -3,7 +3,7 @@
 **Author: Samuel Massé. AI assistance: OpenAI's GPT-6 Astra. License: MIT.**
 
 Lean proofs of the four advertised results in the
-[seven-page paper](paper/tuza-line-total-graphs.pdf): the two universal
+[paper](paper/tuza-line-total-graphs.pdf): the two universal
 inequalities, line-graph sharpness, and cubic triangle-free equality.
 Palomar verification and registration are separate from local compilation;
 see [the submission record](docs/palomar-submission.md) for the current status
@@ -57,10 +57,13 @@ universal proofs independently of those finite experiments. Neither the
 internal audit nor kernel checking establishes expert review or novelty.
 No formal proof uses a missing theorem as an axiom or relies on `native_decide`.
 
-The [provenance note](docs/provenance.md) records two formal proof alternatives:
-Latin-square induction for the clique bounds and a Hall assignment for cubic
-equality. The [statement audit](docs/statement-audit.md) describes the exact
-four-target scope and its shared-definition trust boundary.
+The revised paper follows the checked proof constructions: Latin-square
+induction for the clique bounds and a Hall assignment for cubic equality.
+The [proof alignment audit](docs/proof-alignment-2026-09-11.md) maps its steps
+to Lean declarations. The former general orientation refinement is preserved
+as a [separate informal note](docs/informal-orientation-cover.md). The
+[statement audit](docs/statement-audit.md) records the four-target semantics
+and shared-definition trust boundary.
 
 [Palomar](https://palomar-registry.org/about) requires completed formal proofs,
 Comparator verification, Lean and NanoDa replay, and automated review of the

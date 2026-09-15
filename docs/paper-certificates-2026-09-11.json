@@ -1,0 +1,149 @@
+[
+  {
+    "order": 0,
+    "triangles": 0,
+    "cover_cost": 0,
+    "required_slack": 0,
+    "pair_checks": 0
+  },
+  {
+    "order": 1,
+    "triangles": 0,
+    "cover_cost": 0,
+    "required_slack": 0,
+    "pair_checks": 0
+  },
+  {
+    "order": 2,
+    "triangles": 0,
+    "cover_cost": 0,
+    "required_slack": 0,
+    "pair_checks": 0
+  },
+  {
+    "order": 3,
+    "triangles": 1,
+    "cover_cost": 1,
+    "required_slack": 0,
+    "pair_checks": 0
+  },
+  {
+    "order": 4,
+    "triangles": 1,
+    "cover_cost": 2,
+    "required_slack": 0,
+    "pair_checks": 0
+  },
+  {
+    "order": 5,
+    "triangles": 2,
+    "cover_cost": 4,
+    "required_slack": 0,
+    "pair_checks": 1
+  },
+  {
+    "order": 6,
+    "triangles": 4,
+    "cover_cost": 6,
+    "required_slack": 2,
+    "pair_checks": 6
+  },
+  {
+    "order": 7,
+    "triangles": 6,
+    "cover_cost": 9,
+    "required_slack": 0,
+    "pair_checks": 15
+  },
+  {
+    "order": 8,
+    "triangles": 7,
+    "cover_cost": 12,
+    "required_slack": 2,
+    "pair_checks": 21
+  },
+  {
+    "order": 9,
+    "triangles": 8,
+    "cover_cost": 16,
+    "required_slack": 0,
+    "pair_checks": 28
+  },
+  {
+    "order": 10,
+    "triangles": 11,
+    "cover_cost": 20,
+    "required_slack": 2,
+    "pair_checks": 55
+  },
+  {
+    "order": 11,
+    "triangles": 15,
+    "cover_cost": 25,
+    "required_slack": 0,
+    "pair_checks": 105
+  },
+  {
+    "order": 12,
+    "triangles": 16,
+    "cover_cost": 30,
+    "required_slack": 2,
+    "pair_checks": 120
+  },
+  {
+    "order": 13,
+    "triangles": 18,
+    "cover_cost": 36,
+    "required_slack": 0,
+    "pair_checks": 153
+  },
+  {
+    "order": 14,
+    "triangles": 22,
+    "cover_cost": 42,
+    "required_slack": 2,
+    "pair_checks": 231
+  },
+  {
+    "order": 15,
+    "triangles": 28,
+    "cover_cost": 49,
+    "required_slack": 0,
+    "pair_checks": 378
+  },
+  {
+    "order": 16,
+    "triangles": 29,
+    "cover_cost": 56,
+    "required_slack": 2,
+    "pair_checks": 406
+  },
+  {
+    "order": 17,
+    "triangles": 32,
+    "cover_cost": 64,
+    "required_slack": 0,
+    "pair_checks": 496
+  },
+  {
+    "order": 18,
+    "triangles": 37,
+    "cover_cost": 72,
+    "required_slack": 2,
+    "pair_checks": 666
+  },
+  {
+    "order": 19,
+    "triangles": 45,
+    "cover_cost": 81,
+    "required_slack": 0,
+    "pair_checks": 990
+  },
+  {
+    "order": 20,
+    "triangles": 46,
+    "cover_cost": 90,
+    "required_slack": 2,
+    "pair_checks": 1035
+  }
+]

@@ -5,7 +5,7 @@ import Mathlib.Combinatorics.Hall.Finite
 
 /-! # Cubic total graphs: a distinct incident-edge assignment and the exact bounds
 
-The sharp cover uses Hall's theorem in place of the paper's balanced orientation.
+The sharp cover uses Hall's theorem, as in the revised paper's cubic argument.
 An injective choice of one incident root edge per vertex exists whenever the minimum
 degree is at least two. In a cubic packet, select that incidence edge and the wedge
 between the other two edge-vertices. Select the original root edges outside the

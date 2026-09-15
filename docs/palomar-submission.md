@@ -97,3 +97,21 @@ registered. Palomar's diagnostic advises retaining the submitted repository
 snapshot, retrying the same commit later, and reporting the rendering workflow
 URL if the error recurs. A report is prepared locally for the author's approval;
 no GitHub issue or message to Palomar has been sent.
+
+## Author-requested retry on 11 September 2026
+
+The author requested another attempt. The previous intake still reported the
+same rendering failure, and the upstream patch-release fix remained unmerged.
+Palomar accepted one fresh intake at 19:37:32 UTC, retaining the exact approved
+repository, commit, Comparator path and maintainer relationship:
+
+- Submission: `vlq1fgk84an7`.
+- Submitted commit: `82f6bb5195653b60ee05ad5c662faf4d3bae7667`.
+- [New mechanical run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34639843678): in progress at this checkpoint.
+
+The temporary ownership-verification tag and secret gist were deleted after
+intake. Access credentials are encrypted in ignored local state, with the
+previous submission's credential retained separately. No proof, dependency,
+toolchain or manuscript was changed for the retry. The new intake does not yet
+establish that the rendering blocker is resolved; automated review and the
+author's decision on the actual review remain prerequisites for registration.

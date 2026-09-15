@@ -2,6 +2,9 @@
 
 Date: 8 September 2026. Mode: VERIFICATION, separate judgment pass.
 
+Historical snapshot audit. The [11 September proof-alignment audit](proof-alignment-2026-09-11.md)
+records the revised manuscript's correspondence to the same proof constructions.
+
 ## Result
 
 **Accepted within the checked scope.** No accidental extra assumption, omitted

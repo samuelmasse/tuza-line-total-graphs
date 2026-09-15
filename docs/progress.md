@@ -25,6 +25,12 @@ all four declarations at submitted commit `82f6bb5195653b60ee05ad5c662faf4d3bae7
 The subsequent Challenge-rendering check failed before editorial review.
 See [the submission record](palomar-submission.md) for the evidence and blocker.
 
+The 11 September manuscript revision follows the actual proof constructions.
+Its [proof alignment audit](proof-alignment-2026-09-11.md) includes the exact
+finite certificates, the total-cover arithmetic and the cubic Hall argument.
+The former orientation refinement is preserved separately as informal work.
+This revised manuscript is not the snapshot used by the active Palomar retry.
+
 ## Dependency plan
 
 1. Freeze finite triangle, edge-packing and edge-cover semantics; prove that
@@ -38,10 +44,9 @@ See [the submission record](palomar-submission.md) for the evidence and blocker.
    seam per connected component. Prove all parity and component facts.
 5. Combine local witnesses into genuine disjoint global packings and covers;
    prove the three seam-repair branches and the two headline inequalities.
-6. Prove cubic equality and sharpness. The implemented cubic proof uses Hall's
-   theorem and an incident-edge assignment instead of the manuscript's
-   orientation argument. The general sharper triangle-free total cover and
-   standalone orientation lemma are not separate advertised targets.
+6. Prove cubic equality and sharpness. The cubic proof and revised manuscript
+   use Hall's theorem and an incident-edge assignment. The historical general
+   orientation refinement is now a separate informal note outside this paper.
 7. Compare the exact Challenge/Solution declarations, replay the proofs, audit
    source alignment, complete the Palomar review process and obtain the
    author's decision on registration.

@@ -2,6 +2,11 @@
 
 Date: 8 September 2026. Mode: VERIFICATION.
 
+This audit records the original frozen manuscript. Its statement conclusions
+remain applicable because the four headline statements have not changed.
+The [11 September proof-alignment audit](proof-alignment-2026-09-11.md)
+supersedes the discussion of alternate proof routes and manuscript coverage.
+
 ## Conclusion and scope
 
 Accepted for statement alignment: the four declarations in

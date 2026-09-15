@@ -24,9 +24,10 @@ sources:
     location: Theorems 1.1 and 1.2; Corollary 1.3; line-graph sharpness
     relationship: formalizes
     note: >-
-      Unpublished manuscript dated 7 September 2026, included in this repository.
-      The four advertised results are formalized. See docs/provenance.md for
-      source hashes, proof alternatives and the auxiliary-proposition scope.
+      Unpublished manuscript revised 11 September 2026, included in this repository.
+      Its proof constructions follow the formal development. See
+      docs/proof-alignment-2026-09-11.md for the proof-to-declaration map and
+      docs/provenance.md for the original snapshot and revision history.
   - title: "Sur quelques invariants classiques et nouveaux des hypergraphes"
     authors: ["Andrea Munaro"]
     id: https://andreamunaro.github.io/munaro-thesis.pdf
@@ -39,7 +40,7 @@ related_formalizations:
     relationship: builds-on
     note: Adapts VMath/Tuza/Basic.lean definitions; no completed line/total proof is imported.
 status:
-  scope: "All four advertised results; auxiliary manuscript propositions are not separately advertised targets."
+  scope: "All four headline results, with the revised manuscript following the checked proof constructions. The separate informal orientation note is outside this scope."
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -78,12 +79,13 @@ fidelity:
   divergences: >-
     The formal targets retain finite simple roots, empty and disconnected cases,
     ordinary edge packings and covers. Cubic equality is stated using doubled
-    natural-number counts to avoid truncating 5n/2. The clique bounds use a
-    Latin-square recurrence and explicit kernel-checked finite bases instead
-    of the manuscript's clique construction. Cubic equality uses a Hall
-    assignment instead of balanced orientations. The general triangle-free
-    total-cover proposition and standalone orientation lemma are not separate
-    targets. See docs/provenance.md and docs/statement-audit.md.
+    natural-number counts to avoid truncating 5n/2. Both the manuscript and
+    Lean use a Latin-square recurrence and the same finite clique bases,
+    Euler coloring and packet assembly, and a Hall assignment for cubic
+    equality. The manuscript's explanatory case ordering and notation differ
+    from Lean without changing the constructions or dependencies. The earlier
+    orientation refinement is a separate informal note outside this paper.
+    See docs/proof-alignment-2026-09-11.md and docs/statement-audit.md.
 review:
   status: unchecked
   notes: >-
@@ -95,7 +97,10 @@ review:
     replay accepted all four targets at commit
     82f6bb5195653b60ee05ad5c662faf4d3bae7667. Its subsequent rendering check
     failed before automated review; see docs/palomar-submission.md. No human
-    expert review or novelty certification is claimed.
+    expert review or novelty certification is claimed. A further source-level
+    audit on 11 September accepted correspondence between the revised paper's
+    proof constructions and the Lean development; this is not Palomar review
+    of the revised manuscript.
 alignment:
   namespace: Tuza
   statements:

@@ -16,8 +16,9 @@ At every even order at least six it also proves the same inequality with
 `cliqueCoverCost n + 2` on the left. Cardinality-equivalence versions cover
 any finite vertex type. The empty graph is included.
 
-The formal proof uses an alternative elementary construction to the paper's
-round-robin proof. For a finite additive group `A`, the triangles indexed by
+The formal proof and revised paper use the same elementary construction.
+It replaces the earlier manuscript's round-robin proof. For a finite additive
+group `A`, the triangles indexed by
 `(a, b, a + b)` use one vertex from each of three disjoint copies. Cancellation
 shows that distinct triangles share at most one vertex. They give exactly
 `|A|²` triangles. Adding an arbitrary maximum internal clique packing in each
