@@ -153,3 +153,21 @@ show the author the exact intake tuple for submission approval. Historical
 September authorization is not authorization for a different source SHA.
 Registration still requires the author's decision on the actual returned
 Palomar review.
+
+## October hosted preflight: input repair
+
+The reviewed paper was committed and pushed as
+`01dce87db5e4327402f4e92e91715b66e7d0e5f2` after the author's approval.
+Its [Lean CI](https://github.com/samuelmasse/tuza-line-total-graphs/actions/runs/37731727955)
+passed. The first
+[full preflight](https://github.com/samuelmasse/tuza-line-total-graphs/actions/runs/37731751447)
+stopped before building, and the report finalizer replaced the input error
+with `palomar.reporting_failed`.
+
+Inspection of the pinned pipeline's `scripts/submission_contract.py` found
+that the request ID must match `^[0-9a-z]{12}$`, despite the workflow input's
+broader description. The caller also omitted the required authorization
+relationship in its options. The workflow now generates a 12-character hex
+ID and explicitly declares the author's maintainer relationship. This repair
+changes no mathematical source or paper; the next full run must use the
+new commit containing the corrected workflow.

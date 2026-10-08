@@ -110,6 +110,11 @@ not on proof `.olean` files loaded into the comparison process.
 The compact [verification manifest](reviews/verification-2026-10-08.json)
 binds the reviewed proof sources, metadata and paper to SHA-256 hashes.
 The [axiom output](reviews/axioms-2026-10-08.txt) records the 42 named checks.
+The manifest identifies the review snapshot published as commit `01dce87`.
+The subsequent preflight caller input repair is recorded in
+[the submission history](palomar-submission.md); its workflow hash consequently
+differs from that historical manifest. Mathematical sources, metadata and
+paper hashes are unchanged by that repair.
 
 ### Reproducing the local export comparison
 
