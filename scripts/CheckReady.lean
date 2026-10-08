@@ -1,7 +1,14 @@
-import Solution
-import Lean.Util.CollectAxioms
+module
 
-/-! This check must fail until all advertised proof declarations are present. -/
+import Solution
+import all Tuza.LineBound
+import all Tuza.TotalBound
+import all Tuza.SmallGraphs
+import all Tuza.CubicTotal
+public import Lean.Util.CollectAxioms
+
+/-! Import proof bodies from their defining modules: `import all` is not transitive
+through ordinary public imports. Reject missing proofs and unapproved axioms. -/
 
 open Lean Elab Command in
 run_cmd do

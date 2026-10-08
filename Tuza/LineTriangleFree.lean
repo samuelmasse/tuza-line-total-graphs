@@ -1,6 +1,10 @@
-import Tuza.LocalCliqueCover
-import Tuza.LinePackets
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
+module
+
+public import Tuza.LocalCliqueCover
+public import Tuza.LinePackets
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+
+@[expose] public section
 
 namespace Tuza
 

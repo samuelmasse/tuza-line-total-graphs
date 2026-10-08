@@ -1,6 +1,10 @@
-import Tuza.CliqueCertificateTools
-import Tuza.CliqueArithmetic
-import Mathlib.Tactic.IntervalCases
+module
+
+public import Tuza.CliqueCertificateTools
+public import Tuza.CliqueArithmetic
+public import Mathlib.Tactic.IntervalCases
+
+@[expose] public section
 
 /-! # Kernel-checked witnesses for the finitely many induction bases
 

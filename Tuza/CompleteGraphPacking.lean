@@ -1,5 +1,9 @@
-import Tuza.CliqueRecurrence
-import Tuza.CliqueFiniteCertificates
+module
+
+public import Tuza.CliqueRecurrence
+public import Tuza.CliqueFiniteCertificates
+
+@[expose] public section
 
 /-! # The uniform clique packing bounds used by the paper -/
 

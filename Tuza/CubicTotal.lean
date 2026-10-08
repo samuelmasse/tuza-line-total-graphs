@@ -1,7 +1,11 @@
-import Tuza.TotalPackets
-import Tuza.LinePackets
-import Mathlib.Combinatorics.SimpleGraph.DegreeSum
-import Mathlib.Combinatorics.Hall.Finite
+module
+
+public import Tuza.TotalPackets
+public import Tuza.LinePackets
+public import Mathlib.Combinatorics.SimpleGraph.DegreeSum
+public import Mathlib.Combinatorics.Hall.Finite
+
+@[expose] public section
 
 /-! # Cubic total graphs: a distinct incident-edge assignment and the exact bounds
 
@@ -54,7 +58,8 @@ theorem total_exists_incident_edge_assignment (hdeg : ∀ v, 2 ≤ G.degree v) :
           apply sum_le_sum
           intro e he
           obtain ⟨v,_,hev⟩ := mem_biUnion.mp he
-          have heG : e ∈ G.edgeSet := G.incidenceSet_subset v ((G.mem_incidenceFinset v e).mp hev)
+          have heG : e ∈ G.edgeSet := G.incidenceSet_subset v
+            ((G.mem_incidenceFinset (v := v) (e := e)).mp hev)
           rw [← G.dart_edge_fiber_card e heG]
           apply card_le_card
           exact filter_subset_filter _ (filter_subset _ _)
@@ -68,10 +73,11 @@ theorem total_exists_incident_edge_assignment (hdeg : ∀ v, 2 ≤ G.degree v) :
   obtain ⟨f,hf,hmem⟩ := (all_card_le_biUnion_card_iff_existsInjective'
     (fun v => G.incidenceFinset v)).mp hhall
   let pick : V ↪ G.edgeSet := ⟨fun v => ⟨f v, G.incidenceSet_subset v
-    ((G.mem_incidenceFinset v (f v)).mp (hmem v))⟩,
+    ((G.mem_incidenceFinset (v := v) (e := f v)).mp (hmem v))⟩,
     fun _ _ h => hf (congrArg Subtype.val h)⟩
   refine ⟨pick, fun v => ?_⟩
-  exact (G.edge_mem_incidenceSet_iff).mp ((G.mem_incidenceFinset v (f v)).mp (hmem v))
+  exact (G.edge_mem_incidenceSet_iff).mp
+    ((G.mem_incidenceFinset (v := v) (e := f v)).mp (hmem v))
 
 theorem cubic_total_packing_lower_bound (hdeg : ∀ v, G.degree v = 3) :
     5 * Fintype.card V ≤ 2 * trianglePackingNumber (totalGraph G) := by
@@ -98,11 +104,12 @@ theorem totalIncidentEdges_card (v : V) : (totalIncidentEdges G v).card = G.degr
   rw [← G.card_incidenceFinset_eq_degree v]
   apply card_bij (fun e _ => e.val)
   · intro e he
-    exact (G.mem_incidenceFinset v e.val).mpr ⟨e.property, (mem_totalIncidentEdges G v e).mp he⟩
+    exact (G.mem_incidenceFinset (v := v) (e := e.val)).mpr
+      ⟨e.property, (mem_totalIncidentEdges G v e).mp he⟩
   · intro a _ b _ h
     exact Subtype.ext h
   · intro e he
-    have he' := (G.mem_incidenceFinset v e).mp he
+    have he' := (G.mem_incidenceFinset (v := v) (e := e)).mp he
     exact ⟨⟨e,he'.1⟩, by simpa using he'.2, rfl⟩
 
 theorem cubic_remaining_pair (hdeg : ∀ v, G.degree v = 3)

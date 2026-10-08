@@ -1,4 +1,8 @@
-import Tuza.Operators
+module
+
+public import Tuza.Operators
+
+@[expose] public section
 
 /-! # Unique wedge ownership and the line-graph triangle classification -/
 

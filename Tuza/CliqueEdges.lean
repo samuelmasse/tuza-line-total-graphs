@@ -1,4 +1,8 @@
-import Tuza.PackingTools
+module
+
+public import Tuza.PackingTools
+
+@[expose] public section
 
 /-! # Edges of a complete graph on a specified finite vertex subset -/
 

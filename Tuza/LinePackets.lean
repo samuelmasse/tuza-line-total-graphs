@@ -1,5 +1,9 @@
-import Tuza.PackingTools
-import Tuza.LineTriangles
+module
+
+public import Tuza.PackingTools
+public import Tuza.LineTriangles
+
+@[expose] public section
 
 /-! # Combining the incidence-clique packings in a line graph -/
 

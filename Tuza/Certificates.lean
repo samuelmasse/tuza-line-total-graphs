@@ -1,4 +1,8 @@
-import Tuza.Definitions
+module
+
+public import Tuza.Definitions
+
+@[expose] public section
 
 /-! # Converting explicit packing and cover witnesses into numerical bounds -/
 

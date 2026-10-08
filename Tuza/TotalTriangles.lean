@@ -1,4 +1,8 @@
-import Tuza.Operators
+module
+
+public import Tuza.Operators
+
+@[expose] public section
 
 /-! # Bridge triangles and the incidence cliques in a total graph -/
 

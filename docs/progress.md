@@ -29,7 +29,36 @@ The 11 September manuscript revision follows the actual proof constructions.
 Its [proof alignment audit](proof-alignment-2026-09-11.md) includes the exact
 finite certificates, the total-cover arithmetic and the cubic Hall argument.
 The former orientation refinement is preserved separately as informal work.
-This revised manuscript is not the snapshot used by the active Palomar retry.
+The September retry also ended in a rendering failure; it is not active.
+
+## Publication review, 8 October 2026
+
+The current manuscript retains the four exact headline claims. A skeptical
+proof pass accepted the paper's arguments, including the odd Eulerian seam,
+total-cover arithmetic, Hall assignment and all 328 finite-base triangles.
+The literature pass found no earlier full-scope headline statement, but added
+explicit Guruswami/Hanaka--Kobayashi--Sone coloring attribution and direct
+Sebő-via-Munaro credit for the finite bases. This is not novelty certification.
+
+Lean and Mathlib now both use 4.35.0-rc4, with Mathlib pinned at
+`1f414401f69059aa7eead47b53ee40bd38455eeb`. All committed Lean sources use
+the module system. Incidence-finset repairs in three proof modules adapt implicit
+arguments; they do not alter the proof constructions. Audit scripts import
+the defining modules' proof bodies explicitly so theorem-kind checks remain
+meaningful under the new module system.
+
+Validation passed: the 1,333-job project build, separate Challenge build,
+four-target readiness check, 42-theorem axiom audit, exact exported-statement
+comparison using Lake's comparison and axiom routines, fresh Lean replay and
+NanoDa replay. The copied definition bodies remain identical. The 9-page PDF
+has been rebuilt and visually reviewed. See the
+[publication audit](publication-review-2026-10-08.md) for evidence and limits.
+
+The [new reusable full-preflight workflow](../.github/workflows/palomar-preflight.yml)
+is prepared. It has not run against a published October source commit.
+The author authorized committing, pushing and running this preflight on
+8 October after the review. No new intake or registration has been created.
+The [submission preview](submission-preview.md) records the release sequence.
 
 ## Dependency plan
 

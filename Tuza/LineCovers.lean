@@ -1,6 +1,10 @@
-import Tuza.CliqueEdges
-import Tuza.LinePackets
-import Tuza.ColorCover
+module
+
+public import Tuza.CliqueEdges
+public import Tuza.LinePackets
+public import Tuza.ColorCover
+
+@[expose] public section
 
 /-! # Counting a line graph's monochromatic wedge cover -/
 

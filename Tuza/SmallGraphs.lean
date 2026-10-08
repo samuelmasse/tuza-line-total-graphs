@@ -1,5 +1,9 @@
-import Tuza.Operators
-import Tuza.Certificates
+module
+
+public import Tuza.Operators
+public import Tuza.Certificates
+
+@[expose] public section
 
 /-! # Exact boundary and sharpness examples, checked by kernel reduction
 

@@ -1,7 +1,11 @@
-import Tuza.LineConnected
-import Tuza.LineComponents
-import Tuza.LineTriangleAugment
-import Tuza.CompleteGraphPacking
+module
+
+public import Tuza.LineConnected
+public import Tuza.LineComponents
+public import Tuza.LineTriangleAugment
+public import Tuza.CompleteGraphPacking
+
+@[expose] public section
 
 /-! # Tuza's inequality for every finite simple line graph -/
 

@@ -1,5 +1,9 @@
-import Tuza.PackingTools
-import Tuza.SmallGraphs
+module
+
+public import Tuza.PackingTools
+public import Tuza.SmallGraphs
+
+@[expose] public section
 
 /-! # Maximum local packings avoiding a prescribed edge at orders two and four -/
 

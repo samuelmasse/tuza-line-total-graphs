@@ -1,5 +1,9 @@
-import Tuza.LineColorBounds
-import Tuza.LineTriangleFree
+module
+
+public import Tuza.LineColorBounds
+public import Tuza.LineTriangleFree
+
+@[expose] public section
 
 /-! # Assembly of the connected-root line-graph inequality -/
 

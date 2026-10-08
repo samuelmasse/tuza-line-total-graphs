@@ -27,7 +27,7 @@
 
 \title{Tuza's conjecture for line and total graphs}
 \author{Samuel Mass\'{e}}
-\date{11 September 2026}
+\date{8 October 2026}
 
 \begin{document}
 
@@ -108,6 +108,14 @@ for certain $K_4$-free graphs \cite{munaro2018}.  Those hypotheses do not cover
 the unbounded-degree classes considered here.  We are not aware of a previous
 statement of either theorem in the full scope given above.
 
+The alternating Euler-tour coloring method is classical.  Guruswami used
+it to study maximum cuts in line and total graphs \cite{guruswami1999};
+Hanaka, Kobayashi and Sone give a later account of the dummy-vertex
+construction \cite[Section~6]{hanaka2020}.  Our use of this method pairs
+the resulting covers with triangle packings.  The odd Eulerian seam requires
+the explicit repair in Lemma~\ref{lem:seam}; the total-graph argument instead
+balances each enlarged incidence clique by its original vertex.
+
 All graphs in the paper are finite and simple; empty and disconnected roots
 are allowed.  Simplicity ensures that two distinct root edges have at most
 one common endpoint.  The proofs construct an actual transversal $C$ and
@@ -132,10 +140,12 @@ inside a part, gives a triangle transversal of size $t(d)$.  Explicitly,
 \end{equation}
 
 We use the following elementary lower bounds on $D(d)$.  The basic
-complete-graph inequality is classical; compare the construction attributed
-to Seb\H{o} in \cite[Theorem~3.3.2]{munaro2016}.  The following proof uses the
-same Latin-square recurrence and finite bases as the Lean development and
-supplies the additional even-order slack.
+complete-graph inequality is classical.  Our finite bases use the cyclic
+construction attributed to Seb\H{o} in
+\cite[Theorem~3.3.2]{munaro2016}, with one extra triangle at even orders
+at least six.  The following proof uses the same Latin-square recurrence
+and finite bases as the Lean development and supplies the required
+even-order slack.
 
 \begin{lemma}[Local clique slack]\label{lem:clique}
 For every integer $d\geq 0$,
@@ -229,7 +239,6 @@ endpoint, and hence
 \end{equation}
 We call $W_v$ the \emph{wedge packet} at $v$.
 
-\newpage
 \begin{lemma}[Line-graph triangle classification]\label{lem:line-class}
 Every triangle of $L(H)$ is exactly one of the following:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -519,6 +528,11 @@ triangle packings and edge transversals.  Empty and disconnected roots are
 included.  The cubic conclusion uses the equivalent natural-number identities
 $2\tau_\tri=5|V(F)|$ and $2\nu_\tri=5|V(F)|$.
 
+The 8 October 2026 revision builds with Lean 4.35.0-rc4 and matching pinned
+Mathlib sources.  Local axiom audits, fresh Lean kernel replay and a separate
+NanoDa replay accept all four headline proofs.  These checks establish the
+encoded results; they do not establish novelty or human expert review.
+
 At source commit \texttt{82f6bb5}, using Lean 4.33.1 and the pinned Mathlib
 dependency, all four declarations passed
 \href{https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34193414990}
@@ -528,8 +542,8 @@ occur in the audited axioms.  The deliberately incomplete Challenge
 statements are separate from the completed Solution proofs.  A detailed
 proof-to-declaration map and full commit identifiers are provided in the
 repository.  That mechanical run checked the Lean sources before this
-expository revision; it did not review this revised manuscript, establish
-novelty, or constitute human expert review or completed registration.
+expository revision.  Its later rendering stage failed before automated
+review.  No Palomar review or registration of the present revision is claimed.
 
 \section{Concluding remarks}
 

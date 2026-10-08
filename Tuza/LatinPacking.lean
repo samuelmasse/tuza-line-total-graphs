@@ -1,6 +1,10 @@
-import Tuza.PackingTools
-import Mathlib.Combinatorics.SimpleGraph.Triangle.Tripartite
-import Mathlib.Algebra.Group.Basic
+module
+
+public import Tuza.PackingTools
+public import Mathlib.Combinatorics.SimpleGraph.Triangle.Tripartite
+public import Mathlib.Algebra.Group.Basic
+
+@[expose] public section
 
 /-! # A Latin-square triangle packing across three equal vertex parts
 

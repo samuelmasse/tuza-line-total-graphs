@@ -1,6 +1,10 @@
-import Mathlib.Combinatorics.SimpleGraph.Clique
-import Mathlib.Combinatorics.SimpleGraph.LineGraph
-import Mathlib.Data.Finset.Max
+module
+
+public import Mathlib.Combinatorics.SimpleGraph.Clique
+public import Mathlib.Combinatorics.SimpleGraph.LineGraph
+public import Mathlib.Data.Finset.Max
+
+@[expose] public section
 
 /-!
 # Triangle packing and edge-cover definitions

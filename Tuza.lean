@@ -1,13 +1,17 @@
-import Tuza.Definitions
-import Tuza.Certificates
-import Tuza.Operators
-import Tuza.CliqueArithmetic
-import Tuza.ColorCover
-import Tuza.LineTriangles
-import Tuza.SmallGraphs
-import Tuza.TotalTriangles
-import Tuza.CubicTotal
-import Tuza.LineComponents
-import Tuza.LineConnected
-import Tuza.TotalBound
-import Tuza.LineBound
+module
+
+public import Tuza.Definitions
+public import Tuza.Certificates
+public import Tuza.Operators
+public import Tuza.CliqueArithmetic
+public import Tuza.ColorCover
+public import Tuza.LineTriangles
+public import Tuza.SmallGraphs
+public import Tuza.TotalTriangles
+public import Tuza.CubicTotal
+public import Tuza.LineComponents
+public import Tuza.LineConnected
+public import Tuza.TotalBound
+public import Tuza.LineBound
+
+@[expose] public section

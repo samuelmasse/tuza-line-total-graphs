@@ -1,12 +1,16 @@
-import Tuza.TotalPackets
-import Tuza.LinePackets
-import Tuza.LineCovers
-import Tuza.BalancedColoring
-import Tuza.CompleteGraphPacking
-import Tuza.ColorCover
-import Tuza.CliqueArithmetic
-import Mathlib.Combinatorics.SimpleGraph.DegreeSum
-import Mathlib.Tactic.Linarith
+module
+
+public import Tuza.TotalPackets
+public import Tuza.LinePackets
+public import Tuza.LineCovers
+public import Tuza.BalancedColoring
+public import Tuza.CompleteGraphPacking
+public import Tuza.ColorCover
+public import Tuza.CliqueArithmetic
+public import Mathlib.Combinatorics.SimpleGraph.DegreeSum
+public import Mathlib.Tactic.Linarith
+
+@[expose] public section
 
 /-! # Total-graph covers from global edge colors and local vertex colors -/
 
@@ -170,11 +174,12 @@ theorem total_colored_incidence_add (color : G.edgeSet → Bool) (v : V) :
     rw [← G.card_incidenceFinset_eq_degree v]
     apply card_bij (fun e _ => e.val)
     · intro e he
-      exact (G.mem_incidenceFinset v e.val).mpr ⟨e.property, (mem_filter.mp he).2⟩
+      exact (G.mem_incidenceFinset (v := v) (e := e.val)).mpr
+        ⟨e.property, (mem_filter.mp he).2⟩
     · intro a _ b _ h
       exact Subtype.ext h
     · intro e he
-      have he' := (G.mem_incidenceFinset v e).mp he
+      have he' := (G.mem_incidenceFinset (v := v) (e := e)).mp he
       exact ⟨⟨e,he'.1⟩, by simpa [s] using he'.2, rfl⟩
   rw [← hcard]
   simpa [coloredIncidence, s, filter_filter, Bool.not_eq_false] using

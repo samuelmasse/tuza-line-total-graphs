@@ -1,4 +1,8 @@
-import Tuza.PackingTools
+module
+
+public import Tuza.PackingTools
+
+@[expose] public section
 
 /-! # A small independent checker for literal lists of clique triangles
 

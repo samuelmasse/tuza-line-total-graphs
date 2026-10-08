@@ -1,5 +1,9 @@
-import Tuza.LinePackets
-import Tuza.CliqueEdgeAvoidance
+module
+
+public import Tuza.LinePackets
+public import Tuza.CliqueEdgeAvoidance
+
+@[expose] public section
 
 /-! # Adding a root triangle to maximum degree-two/four incidence packings -/
 

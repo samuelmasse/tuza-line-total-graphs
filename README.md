@@ -18,12 +18,10 @@ These are special graph classes; the general Tuza conjecture is not resolved.
 
 ## Build and status
 
-The project pins Lean 4.33.1 and Mathlib commit
-`db584cd6d46c92f209a44c0f1c829460d327499d`, an ancestor of Mathlib's canonical
-master branch. Its mathematical source is identical to the initially checked
-4.33.1 release commit; that release commit itself fails Palomar's ancestry
-policy. The patched Lean 4.33.1 kernel is retained, and dependencies are built
-from source. With the Lean toolchain installed:
+The reviewed 8 October 2026 revision pins Lean 4.35.0-rc4 and Mathlib commit
+`1f414401f69059aa7eead47b53ee40bd38455eeb`, an ancestor of Mathlib's canonical
+master branch. The project and Mathlib toolchain files agree exactly, allowing
+the matching dependency cache. With the Lean toolchain installed:
 
 ```sh
 lake build
@@ -34,6 +32,15 @@ declarations and audit their transitive axioms. The four targets retain empty
 and disconnected roots. They do not separately certify every auxiliary
 proposition printed in the manuscript.
 
+The October build, 42-theorem axiom audit, local exported-statement comparison,
+fresh Lean replay and NanoDa replay pass. The paper's proof and literature
+reviews are recorded in [the publication audit](docs/publication-review-2026-10-08.md).
+Earlier Palomar attempts passed mechanical verification but failed rendering;
+none reached registration. The October revision is prepared for author review,
+with its required hosted full preflight still pending. See the
+[submission preview](docs/submission-preview.md) for the exact proposed scope
+and remaining release steps.
+
 - `Tuza/`: definitions and implemented proof modules.
 - `Challenge.lean`: the independent, readable target statements; deliberate
   statement holes are permitted here by Comparator's design.
@@ -42,7 +49,7 @@ proposition printed in the manuscript.
 - `scripts/check-ready.ps1`: rejects missing headline proofs and unapproved
   axioms.
 - `formalization.yaml`: author, sources, automation disclosure and limitations.
-- `paper/`: the frozen manuscript, bibliography and PDF.
+- `paper/`: the current manuscript, bibliography and reviewed PDF.
 
 ## Provenance and verification
 

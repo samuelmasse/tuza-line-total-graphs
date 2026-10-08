@@ -1,6 +1,9 @@
-import Tuza.CliqueConstruction
-import Tuza.CliqueRecurrenceArithmetic
+module
 
+public import Tuza.CliqueConstruction
+public import Tuza.CliqueRecurrenceArithmetic
+
+@[expose] public section
 
 /-! # Uniform complete-graph packing bounds
 

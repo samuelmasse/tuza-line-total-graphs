@@ -1,6 +1,10 @@
-import Tuza.CliqueArithmetic
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Tactic.Linarith
+module
+
+public import Tuza.CliqueArithmetic
+public import Mathlib.Data.Nat.Choose.Basic
+public import Mathlib.Tactic.Linarith
+
+@[expose] public section
 
 namespace Tuza
 

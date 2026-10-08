@@ -1,5 +1,9 @@
-import Mathlib.Combinatorics.SimpleGraph.Trails
-import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
+module
+
+public import Mathlib.Combinatorics.SimpleGraph.Trails
+public import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
+
+@[expose] public section
 
 /-! # Euler tours from longest trails
 

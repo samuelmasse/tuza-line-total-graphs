@@ -1,4 +1,8 @@
-import Tuza
+module
+
+public import Tuza
+
+@[expose] public section
 
 /-!
 # Proof entry point

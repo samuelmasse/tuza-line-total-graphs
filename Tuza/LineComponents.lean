@@ -1,6 +1,10 @@
-import Tuza.PackingTools
-import Tuza.Operators
-import Tuza.BalancedColoring
+module
+
+public import Tuza.PackingTools
+public import Tuza.Operators
+public import Tuza.BalancedColoring
+
+@[expose] public section
 
 /-! # Assembling line-graph certificates across root components -/
 

@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
         with:
-          use-mathlib-cache: "false"
+          use-mathlib-cache: "true"
       - name: Check formal target statements
         run: lake build Challenge
       - name: Audit implemented proof axioms

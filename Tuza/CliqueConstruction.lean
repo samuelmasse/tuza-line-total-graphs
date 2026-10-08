@@ -1,5 +1,9 @@
-import Tuza.LatinPacking
-import Mathlib.Data.ZMod.Basic
+module
+
+public import Tuza.LatinPacking
+public import Mathlib.Data.ZMod.Basic
+
+@[expose] public section
 
 /-! # Adding three internal clique packings to a Latin packing -/
 

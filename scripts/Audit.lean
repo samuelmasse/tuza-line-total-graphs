@@ -1,5 +1,25 @@
+module
+
 import Solution
-import Lean.Util.CollectAxioms
+import all Tuza.Certificates
+import all Tuza.CliqueArithmetic
+import all Tuza.ColorCover
+import all Tuza.LineTriangles
+import all Tuza.SmallGraphs
+import all Tuza.TotalTriangles
+import all Tuza.CompleteGraphPacking
+import all Tuza.Eulerian
+import all Tuza.BalancedColoring
+import all Tuza.LinePackets
+import all Tuza.LineCovers
+import all Tuza.LineTriangleFree
+import all Tuza.LineColorBounds
+import all Tuza.LineComponents
+import all Tuza.TotalPackets
+import all Tuza.TotalBound
+import all Tuza.CubicTotal
+import all Tuza.LineBound
+public import Lean.Util.CollectAxioms
 
 /-! Local axiom audit of implemented results. This does not replace Comparator. -/
 

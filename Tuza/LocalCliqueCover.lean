@@ -1,5 +1,9 @@
-import Tuza.CliqueEdges
-import Tuza.LineArithmetic
+module
+
+public import Tuza.CliqueEdges
+public import Tuza.LineArithmetic
+
+@[expose] public section
 
 namespace Tuza
 

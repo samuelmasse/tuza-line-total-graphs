@@ -1,6 +1,10 @@
-import Mathlib.Combinatorics.SimpleGraph.Clique
-import Mathlib.Combinatorics.SimpleGraph.LineGraph
-import Mathlib.Data.Finset.Max
+module
+
+public import Mathlib.Combinatorics.SimpleGraph.Clique
+public import Mathlib.Combinatorics.SimpleGraph.LineGraph
+public import Mathlib.Data.Finset.Max
+
+@[expose] public section
 
 /-!
 # Tuza's conjecture for line and total graphs: target statements

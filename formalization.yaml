@@ -24,7 +24,7 @@ sources:
     location: Theorems 1.1 and 1.2; Corollary 1.3; line-graph sharpness
     relationship: formalizes
     note: >-
-      Unpublished manuscript revised 11 September 2026, included in this repository.
+      Unpublished manuscript revised 8 October 2026, included in this repository.
       Its proof constructions follow the formal development. See
       docs/proof-alignment-2026-09-11.md for the proof-to-declaration map and
       docs/provenance.md for the original snapshot and revision history.
@@ -35,6 +35,12 @@ sources:
     location: Theorem 3.3.2 and Corollary 3.3.3
     relationship: background
     note: Classical clique-packing construction attributed to Sebő and prior triangle-free-root line-graph result.
+  - title: "Maximum cut on line and total graphs"
+    authors: ["Venkatesan Guruswami"]
+    id: https://doi.org/10.1016/S0166-218X(99)00056-6
+    type: paper
+    relationship: background
+    note: Established alternating Euler-coloring method; attribution also documented in Hanaka, Kobayashi and Sone, arXiv:2002.12706v2, Section 6.
 related_formalizations:
   - id: https://github.com/samuelmasse/vmath
     relationship: builds-on
@@ -74,7 +80,8 @@ automation:
   notes: >-
     GPT-6 Astra contributed to mathematical proof development, internal checks,
     literature search, exposition and formalization. No missing proof is
-    introduced as an axiom and no native_decide premise is permitted.
+    introduced as an axiom and no native_decide premise is permitted. Codex
+    also assisted with the October publication audit and toolchain migration.
 fidelity:
   divergences: >-
     The formal targets retain finite simple roots, empty and disconnected cases,
@@ -100,7 +107,14 @@ review:
     expert review or novelty certification is claimed. A further source-level
     audit on 11 September accepted correspondence between the revised paper's
     proof constructions and the Lean development; this is not Palomar review
-    of the revised manuscript.
+    of the revised manuscript. The October revision passes local Lean 4.35.0-rc4
+    builds, all 42 named axiom checks, comparison of exported headline statements,
+    fresh Lean replay and NanoDa replay. Separate skeptical and literature
+    passes are recorded in docs/reviews/. No earlier full-scope headline
+    statement was located, but novelty remains unconfirmed. Original full
+    texts of Guruswami 1999 and Tuza 1990 were inaccessible in that search.
+    The current revision has not passed the newly required hosted full
+    preflight or been submitted; see docs/submission-preview.md.
 alignment:
   namespace: Tuza
   statements:

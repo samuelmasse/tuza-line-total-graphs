@@ -1,5 +1,12 @@
 # Palomar submission
 
+**Current status, 8 October 2026:** no registration. The September retry
+also passed mechanical verification and failed rendering. An updated,
+locally checked revision is prepared for the author's review; it has not been
+submitted. See [the proposed submission](submission-preview.md).
+
+## Historical intake, 8 September
+
 Submitted on 8 September 2026 after the author's confirmation of the exact
 repository, commit, configuration and maintainer relationship.
 
@@ -107,7 +114,7 @@ repository, commit, Comparator path and maintainer relationship:
 
 - Submission: `vlq1fgk84an7`.
 - Submitted commit: `82f6bb5195653b60ee05ad5c662faf4d3bae7667`.
-- [New mechanical run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34639843678): in progress at this checkpoint.
+- [New mechanical run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34639843678): subsequently passed.
 
 The temporary ownership-verification tag and secret gist were deleted after
 intake. Access credentials are encrypted in ignored local state, with the
@@ -115,3 +122,34 @@ previous submission's credential retained separately. No proof, dependency,
 toolchain or manuscript was changed for the retry. The new intake does not yet
 establish that the rendering blocker is resolved; automated review and the
 author's decision on the actual review remain prerequisites for registration.
+
+## Retry outcome and October repair
+
+The [retry's final rendering run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34667477675)
+failed at workspace cache discovery, again before automated review. The report
+classified `palomar.render_failed` as service-owned, retryable and not a
+submission repair. Retrying the unchanged snapshot did not remove the
+toolchain/cache mismatch. No registry entry was found for this project in the
+public registry search on 8 October.
+
+Current Palomar policy requires exact agreement between the project and the
+resolved Mathlib `lean-toolchain`, Lean at least 4.35.0-rc2, and `module`
+headers in committed Lean files. This revision uses matching 4.35.0-rc4
+toolchains and a canonical Mathlib pin. Local proof checks pass, but renderer
+success is not inferred from them.
+
+The current [agent intake protocol](https://submit.palomar-registry.org/llms.txt)
+also requires a passing **full** hosted mechanical preflight before intake,
+using the exact source commit and pinned reusable workflow. The prepared
+workflow pins pipeline `d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44`, requests
+`mode: full` and `execution_profile: palomar-standard-v1`, and names
+`comparator.json`. Its configuration was checked against that workflow's
+declared inputs. It has not yet been dispatched.
+
+After the author approves committing and pushing the reviewed files, freeze
+the full resulting SHA and run this preflight. Require its report to say
+`pass` for exactly that repository, SHA, configuration and pipeline. Then
+show the author the exact intake tuple for submission approval. Historical
+September authorization is not authorization for a different source SHA.
+Registration still requires the author's decision on the actual returned
+Palomar review.

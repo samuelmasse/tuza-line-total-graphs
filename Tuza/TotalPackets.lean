@@ -1,6 +1,10 @@
-import Tuza.PackingTools
-import Tuza.TotalTriangles
-import Tuza.LineTriangles
+module
+
+public import Tuza.PackingTools
+public import Tuza.TotalTriangles
+public import Tuza.LineTriangles
+
+@[expose] public section
 
 /-! # The bridge packing and disjoint total-graph packet assembly -/
 

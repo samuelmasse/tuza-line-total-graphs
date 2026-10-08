@@ -1,4 +1,8 @@
-import Tuza.Definitions
+module
+
+public import Tuza.Definitions
+
+@[expose] public section
 
 /-! # A two-coloring supplies a triangle edge cover -/
 

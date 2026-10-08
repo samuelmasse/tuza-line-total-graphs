@@ -79,3 +79,24 @@ and shared trust boundary. The earlier round-robin and orientation arguments
 remain accessible in the immutable source commit cited above. The stronger
 orientation refinement is also retained as [an informal note](informal-orientation-cover.md).
 The four headline statements, bibliography and Lean proof terms are unchanged.
+
+## Publication revision, 8 October 2026
+
+This revision starts from source commit
+`09dbb9a839ebf205891f7e14bf6c8167b4e67970`. The four headline statements and
+their mathematical constructions are preserved. The paper now credits the
+Euler-coloring method to Guruswami, with its accessible later account by
+Hanaka, Kobayashi and Sone, and explicitly credits the finite modular packing
+to Sebő through Munaro's published thesis. The bibliography gains those two
+coloring references. The date and formal-verification status are updated.
+
+Codex assisted with the skeptical and literature review, dependency migration,
+proof checks and publication preparation. These are AI-assisted internal
+passes; no outside expert review or definitive priority finding is claimed.
+See [the review record](publication-review-2026-10-08.md) and its linked reports.
+
+The formal source moves to matching Lean/Mathlib 4.35.0-rc4 with public module
+exports. Nine incidence-finset applications are adapted to implicit arguments.
+Local checkers have been updated for the new proof-body visibility rules.
+The dependency manifest changes with the pinned release; the historical
+September replay continues to certify only its original source snapshot.

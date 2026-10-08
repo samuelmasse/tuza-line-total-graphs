@@ -1,4 +1,8 @@
-import Tuza.Definitions
+module
+
+public import Tuza.Definitions
+
+@[expose] public section
 
 /-! # Total graphs and the exact finite-root target statements
 

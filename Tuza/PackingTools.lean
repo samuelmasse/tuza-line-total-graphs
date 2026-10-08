@@ -1,4 +1,8 @@
-import Tuza.Certificates
+module
+
+public import Tuza.Certificates
+
+@[expose] public section
 
 /-! # Structural tools for transporting and combining triangle packings -/
 

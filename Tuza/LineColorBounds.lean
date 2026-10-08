@@ -1,7 +1,11 @@
-import Tuza.LineCovers
-import Tuza.LineArithmetic
-import Tuza.BalancedColoring
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
+module
+
+public import Tuza.LineCovers
+public import Tuza.LineArithmetic
+public import Tuza.BalancedColoring
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+
+@[expose] public section
 
 namespace Tuza
 

@@ -1,6 +1,10 @@
-import Tuza.CliqueArithmetic
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.IntervalCases
+module
+
+public import Tuza.CliqueArithmetic
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.IntervalCases
+
+@[expose] public section
 
 /-! # The arithmetic lift for the three-part clique construction -/
 

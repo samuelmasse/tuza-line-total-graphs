@@ -1,6 +1,10 @@
-import Tuza.Eulerian
-import Mathlib.Algebra.BigOperators.Group.List.Basic
-import Mathlib.Combinatorics.SimpleGraph.DegreeSum
+module
+
+public import Tuza.Eulerian
+public import Mathlib.Algebra.BigOperators.Group.List.Basic
+public import Mathlib.Combinatorics.SimpleGraph.DegreeSum
+
+@[expose] public section
 
 /-! # Alternating edge colorings and exact incidence balance -/
 
@@ -23,12 +27,12 @@ theorem edgeColorDegree_add (color : G.edgeSet → Bool) (v : V) :
     rw [← G.card_incidenceFinset_eq_degree v]
     apply Finset.card_bij (fun e _ => e.val)
     · intro e he
-      apply (G.mem_incidenceFinset v e.val).mpr
+      apply (G.mem_incidenceFinset (v := v) (e := e.val)).mpr
       exact ⟨e.property, (Finset.mem_filter.mp he).2⟩
     · intro a _ b _ h
       exact Subtype.ext h
     · intro e he
-      have he' := G.mem_incidenceFinset v e |>.mp he
+      have he' := G.mem_incidenceFinset (v := v) (e := e) |>.mp he
       exact ⟨⟨e, he'.1⟩, by simpa [s] using he'.2, rfl⟩
   rw [← hcard]
   simpa [edgeColorDegree, s, Finset.filter_filter, Bool.not_eq_true] using

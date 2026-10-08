@@ -1,5 +1,9 @@
-import Mathlib.Tactic.Ring
-import Mathlib.Algebra.Ring.Parity
+module
+
+public import Mathlib.Tactic.Ring
+public import Mathlib.Algebra.Ring.Parity
+
+@[expose] public section
 
 /-! # The balanced-clique cover cost and its parity identities
 
