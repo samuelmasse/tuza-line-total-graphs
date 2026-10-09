@@ -36,8 +36,10 @@ The October build, 42-theorem axiom audit, local exported-statement comparison,
 fresh Lean replay and NanoDa replay pass. The paper's proof and literature
 reviews are recorded in [the publication audit](docs/publication-review-2026-10-08.md).
 Earlier Palomar attempts passed mechanical verification but failed rendering;
-none reached registration. The October revision is prepared for author review,
-with its required hosted full preflight still pending. See the
+none reached registration. The October revision passed the full hosted preflight
+at commit `33a75de51646668b1058c8d505e0b8d0d16bead4` and was submitted as
+`137519rx0911` on 8 October. [Registry verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37810306541)
+is in progress; no registration consent has been given. See the
 [submission preview](docs/submission-preview.md) for the exact proposed scope
 and remaining release steps.
 

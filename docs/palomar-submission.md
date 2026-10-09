@@ -1,9 +1,10 @@
 # Palomar submission
 
-**Current status, 8 October 2026:** no registration. The September retry
-also passed mechanical verification and failed rendering. An updated,
-locally checked revision is prepared for the author's review; it has not been
-submitted. See [the proposed submission](submission-preview.md).
+**Current status, 8 October 2026:** submission `137519rx0911` is verifying
+commit `33a75de51646668b1058c8d505e0b8d0d16bead4`; no registration consent
+has been given. The October full hosted preflight passed without errors or
+warnings. See the October intake record below and its
+[verification run](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37810306541).
 
 ## Historical intake, 8 September
 
@@ -171,3 +172,35 @@ relationship in its options. The workflow now generates a 12-character hex
 ID and explicitly declares the author's maintainer relationship. This repair
 changes no mathematical source or paper; the next full run must use the
 new commit containing the corrected workflow.
+
+## Approved October intake
+
+The corrected full preflight
+[run 37732107872](https://github.com/samuelmasse/tuza-line-total-graphs/actions/runs/37732107872)
+passed with status `pass`, stage `complete`, and no errors or warnings. Its
+schema-2 report binds all four claims, Comparator and Lean/NanoDa/con-ron
+replay to the approved source. Report SHA-256:
+`4668d48abe4ce22e944eaf4e1712cd8fc751b4ad33ae876f65776854e2f509cd`.
+
+After the author explicitly approved the exact tuple, Palomar accepted a new
+ordinary submission at **12:37:52 EDT (16:37:52 UTC), 8 October 2026**:
+
+- Submission: `137519rx0911`.
+- Repository: `samuelmasse/tuza-line-total-graphs`.
+- Commit: `33a75de51646668b1058c8d505e0b8d0d16bead4`.
+- Comparator configuration: `comparator.json`.
+- Declared relationship: `maintainer`.
+- [Registry mechanical verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37810306541): in progress at the initial status check.
+
+The temporary write-access tag and fresh secret gist were deleted immediately
+after verification of the intake proof. Access credentials are protected with
+Windows DPAPI in ignored local state. The authenticated status response was
+checked against the approved repository, source commit and Comparator path.
+
+The bounded HTTPS source scan reported `incomplete` because it checked its
+limit of 32 of the 39 Lean files, with no violation diagnostics. The completed
+full hosted preflight had already checked the entire source scope. The registry
+runs its own verification and review; a passing preflight does not replace
+them. Registration consent is false and remains a separate author decision
+after the actual review is delivered. This status note does not alter the
+immutable submitted commit.

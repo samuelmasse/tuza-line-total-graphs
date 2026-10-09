@@ -5,6 +5,7 @@
 \usepackage[a4paper,margin=30mm]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{enumitem}
+\usepackage{tikz}
 \usepackage[expansion=false]{microtype}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
@@ -25,6 +26,20 @@
 \newcommand{\Tot}{\operatorname{Tot}}
 \newcommand{\dd}{\mathbin{\dot\cup}}
 
+\definecolor{packblue}{RGB}{35,87,137}
+\definecolor{coverred}{RGB}{160,55,45}
+\tikzset{
+  original/.style={circle,fill=black,inner sep=1.7pt},
+  edgevertex/.style={circle,draw=black,fill=white,inner sep=0pt,minimum size=5pt},
+  redvertex/.style={circle,draw=coverred,fill=coverred,inner sep=0pt,minimum size=5pt},
+  bluevertex/.style={circle,draw=packblue,fill=white,inner sep=0pt,minimum size=5pt},
+  graph edge/.style={line width=.6pt},
+  red edge/.style={coverred,line width=1.1pt},
+  blue edge/.style={packblue,dashed,line width=1.1pt},
+  selected/.style={line width=1.8pt},
+  every label/.style={font=\small}
+}
+
 \title{Tuza's conjecture for line and total graphs}
 \author{Samuel Mass\'{e}}
 \date{8 October 2026}
@@ -34,20 +49,15 @@
 \maketitle
 
 \begin{abstract}
-For a graph $G$, let $\nu_\tri(G)$ be the maximum number of pairwise
+For a finite simple graph $G$, let $\nu_\tri(G)$ be the maximum number of pairwise
 edge-disjoint triangles and let $\tau_\tri(G)$ be the minimum number of edges
 meeting every triangle.  We prove $\tau_\tri(G)\leq 2\nu_\tri(G)$ when $G$ is
 the line graph or the total graph of any finite simple graph.  The proofs use
-edge-disjoint incidence cliques and a two-coloring of root edges obtained
-from Euler tours.  A local packing adjustment handles the exceptional
-Euler-tour seam for line graphs; adjoining each original vertex to the
-minority color of its incidence clique absorbs the seam for total graphs.
-The factor two is sharp over line graphs.  A cover constructed from distinct
-incident-edge representatives gives, for every cubic triangle-free graph $F$,
-the exact identity
+local triangle packings in incidence cliques and edge colorings obtained
+from Euler tours.  The factor two is sharp over line graphs.  For every
+cubic triangle-free graph $F$, we also prove the exact identity
 $\tau_\tri(\Tot(F))=\nu_\tri(\Tot(F))=5|V(F)|/2$.
-The proof constructions presented here follow the accompanying Lean
-formalization, including its explicit finite clique-packing certificates.
+The results are formalized in Lean~4.
 \end{abstract}
 
 \section{Introduction}
@@ -61,13 +71,115 @@ by $\nu_\tri(G)$ and $\tau_\tri(G)$, respectively.  Tuza conjectured that
 \end{equation}
 for every finite graph $G$ \cite{tuza1990}.
 
+Every transversal must use a different edge to meet each triangle of an
+edge-disjoint packing, so $\nu_\tri(G)\leq\tau_\tri(G)$.  Conversely, the
+union of the edges of a maximum packing is a transversal: any triangle it
+missed could be added to the packing.  This gives the elementary bound
+$\tau_\tri(G)\leq3\nu_\tri(G)$.  Tuza's conjecture asks whether the factor
+three can always be reduced to two.  The complete graph $K_4$ already shows
+that two would be best possible (Figure~\ref{fig:packing-cover}).
+
 We establish \eqref{eq:tuza} for two graph operators built from the incidence
 structure of a root graph.  The \emph{line graph} $L(H)$ has vertex set
 $E(H)$, with two vertices adjacent when the corresponding root edges meet.
-The \emph{total graph} $\Tot(F)$ has vertex set $V(F)\dd E(F)$; two elements
-are adjacent when they are adjacent or incident in $F$.
+The \emph{total graph} $\Tot(F)$ has vertex set $V(F)\dd E(F)$: it contains
+$F$ on the original vertices and $L(F)$ on the edge-vertices, with each
+original vertex also adjacent to its incident edge-vertices.
+Figure~\ref{fig:operators} illustrates both constructions on a path.
 
-Our main results are the following.
+\begin{figure}[tbp]
+\centering
+\begin{minipage}[t]{.45\linewidth}
+\centering
+\begin{tikzpicture}[scale=.9]
+  \coordinate (a) at (-1.25,.9);
+  \coordinate (b) at (1.25,.9);
+  \coordinate (c) at (0,-1.25);
+  \coordinate (d) at (0,0);
+  \fill[packblue!10] (a)--(b)--(c)--cycle;
+  \draw[graph edge,black!55] (a)--(d)--(b) (c)--(d);
+  \draw[selected,packblue] (a)--(b)--(c)--cycle;
+  \node[original,label=above left:$a$] at (a) {};
+  \node[original,label=above right:$b$] at (b) {};
+  \node[original,label=below:$c$] at (c) {};
+  \node[original,label=right:$d$] at (d) {};
+\end{tikzpicture}
+
+\small A packing of size one
+\end{minipage}\hfill
+\begin{minipage}[t]{.45\linewidth}
+\centering
+\begin{tikzpicture}[scale=.9]
+  \coordinate (a) at (-1.25,.9);
+  \coordinate (b) at (1.25,.9);
+  \coordinate (c) at (0,-1.25);
+  \coordinate (d) at (0,0);
+  \draw[graph edge] (a)--(c)--(b)--(d)--(a);
+  \draw[selected,coverred,dashed] (a)--(b) (c)--(d);
+  \node[original,label=above left:$a$] at (a) {};
+  \node[original,label=above right:$b$] at (b) {};
+  \node[original,label=below:$c$] at (c) {};
+  \node[original,label=right:$d$] at (d) {};
+\end{tikzpicture}
+
+\small A transversal of size two
+\end{minipage}
+\caption{Packing and covering in $K_4$.  The highlighted triangle $abc$
+is a maximum packing, since any two triangles share an edge.  Deleting the
+two dashed edges $ab$ and $cd$ destroys every triangle; deleting any one
+edge leaves a triangle.  Hence $(\nu_\tri,\tau_\tri)=(1,2)$.}
+\label{fig:packing-cover}
+\end{figure}
+
+\begin{figure}[tbp]
+\centering
+\begin{minipage}[t]{.29\linewidth}
+\centering
+\begin{tikzpicture}[scale=.75]
+  \draw[graph edge] (-1.5,.7)--node[above] {$a$} (0,.7)
+    --node[above] {$b$} (1.5,.7);
+  \node[original,label=below:$u$] at (-1.5,.7) {};
+  \node[original,label=below:$v$] at (0,.7) {};
+  \node[original,label=below:$w$] at (1.5,.7) {};
+  \path (-1.8,-.8) rectangle (1.8,1.25);
+\end{tikzpicture}
+
+\small Root graph $H$
+\end{minipage}\hfill
+\begin{minipage}[t]{.23\linewidth}
+\centering
+\begin{tikzpicture}[scale=.75]
+  \draw[graph edge] (-.8,.7)--(.8,.7);
+  \node[edgevertex,label=below:$a$] at (-.8,.7) {};
+  \node[edgevertex,label=below:$b$] at (.8,.7) {};
+  \path (-1.2,-.8) rectangle (1.2,1.25);
+\end{tikzpicture}
+
+\small Line graph $L(H)$
+\end{minipage}\hfill
+\begin{minipage}[t]{.39\linewidth}
+\centering
+\begin{tikzpicture}[scale=.75]
+  \draw[graph edge] (-1.6,.7)--(0,.7)--(1.6,.7)
+    (-1.6,.7)--(-.8,-.35)--(0,.7)--(.8,-.35)--(1.6,.7)
+    (-.8,-.35)--(.8,-.35);
+  \node[original,label=above:$u$] at (-1.6,.7) {};
+  \node[original,label=above:$v$] at (0,.7) {};
+  \node[original,label=above:$w$] at (1.6,.7) {};
+  \node[edgevertex,label=below:$a$] at (-.8,-.35) {};
+  \node[edgevertex,label=below:$b$] at (.8,-.35) {};
+  \path (-1.8,-.8) rectangle (1.8,1.25);
+\end{tikzpicture}
+
+\small Total graph $\Tot(H)$
+\end{minipage}
+\caption{The two graph operators on the path $u-v-w$, with edges $a=uv$
+and $b=vw$.  Solid dots represent original vertices; open circles represent
+root edges.  The total graph has the three triangles $uav$, $vab$, and $vbw$:
+the middle one lies among the incidences at $v$, while the other two each
+use an original edge.}
+\label{fig:operators}
+\end{figure}
 
 \begin{theorem}\label{thm:line}
 If $H$ is a finite simple graph, then
@@ -84,20 +196,33 @@ If $F$ is a finite simple graph, then
 \]
 \end{theorem}
 
+\begin{samepage}
+For cubic triangle-free roots, we obtain the following exact refinement.
+
 \begin{corollary}\label{cor:cubic}
 If $F$ is a finite simple cubic triangle-free graph, then
 \[
   \tau_\tri(\Tot(F))=\nu_\tri(\Tot(F))=\frac52|V(F)|.
 \]
 \end{corollary}
+\end{samepage}
 
-The two proofs share an edge decomposition.  Incidences at a root vertex
-induce a complete graph, and these complete graphs have pairwise disjoint
-edge sets.  Elementary complete-graph packings give local lower bounds.
-A single coloring of the root edges controls triangles that cross several
-incidence cliques.  In total graphs we also select all original root edges;
-the corresponding bridge triangles supply a compatible packing contribution.
-A Hall assignment gives a sharp cover when the root is cubic and triangle-free.
+The main difficulty is to coordinate local choices.  The root edges incident
+with a vertex become a clique in the line graph.  These incidence cliques
+may share vertices, but their edge sets are disjoint, so triangle packings
+chosen inside them can be combined.  Covers need more care: a root
+triangle gives a line-graph triangle with one edge in each of three different
+cliques, which independent local covers may miss.
+
+A single red-blue coloring of the root edges supplies this coordination.
+We cover pairs of incident edges of the same color.  Among any three root
+edges, two have the same color, so this selection hits both kinds of
+line-graph triangle.  The coloring must also be locally balanced to keep
+the cover small; alternating colors along Euler tours achieves this with
+one controlled exception.  In total graphs the original vertices provide
+the freedom to restore local balance, while bridge triangles supply
+an additional packing.  A Hall assignment gives a sharp cover when the
+root is cubic and triangle-free.
 
 The line-graph inequality for triangle-free roots appears in
 \cite[Corollary~3.3.3]{munaro2016}; Theorem~\ref{thm:line} removes that
@@ -118,23 +243,29 @@ balances each enlarged incidence clique by its original vertex.
 
 All graphs in the paper are finite and simple; empty and disconnected roots
 are allowed.  Simplicity ensures that two distinct root edges have at most
-one common endpoint.  The proofs construct an actual transversal $C$ and
-packing $\mathcal P$ in the same graph with $|C|\leq2|\mathcal P|$.
+one common endpoint.  It suffices to construct a transversal $C$ and a
+packing $\mathcal P$ in the same graph satisfying
+\[
+  \tau_\tri(G)\leq |C|\leq 2|\mathcal P|\leq 2\nu_\tri(G).
+\]
+Neither constructed object needs to be optimal.
 The complete-graph bound uses a three-part construction and strong induction,
-with explicit certificates for orders below 21.  These finite certificates
-are checked by Lean's kernel; no exact formula for complete-graph packing
-numbers is assumed.  The results concern the two stated graph classes and
-do not resolve Tuza's conjecture for arbitrary graphs.
+with explicit packings for orders below 21; no exact formula for
+complete-graph packing numbers is needed.
 
-\section{Complete-graph tools}\label{sec:clique}
+\section{Common tools}\label{sec:tools}
 
-For $d\geq 0$, put
+\subsection{Clique packings}\label{sec:clique}
+
+Splitting a clique into two nearly equal parts and deleting edges within
+the parts leaves a bipartite graph, hence destroys every triangle.  We
+compare the cost $t(d)$ of this cover with the maximum packing size $D(d)$:
+for $d\geq0$, put
 \[
   t(d)=\binom d2-\left\lfloor\frac{d^2}{4}\right\rfloor,
   \qquad D(d)=\nu_\tri(K_d).
 \]
-A balanced bipartition of $V(K_d)$, followed by the selection of every edge
-inside a part, gives a triangle transversal of size $t(d)$.  Explicitly,
+Explicitly,
 \begin{equation}\label{eq:t-values}
   t(2r)=r(r-1),\qquad t(2r+1)=r^2.
 \end{equation}
@@ -143,9 +274,8 @@ We use the following elementary lower bounds on $D(d)$.  The basic
 complete-graph inequality is classical.  Our finite bases use the cyclic
 construction attributed to Seb\H{o} in
 \cite[Theorem~3.3.2]{munaro2016}, with one extra triangle at even orders
-at least six.  The following proof uses the same Latin-square recurrence
-and finite bases as the Lean development and supplies the required
-even-order slack.
+at least six.  A Latin-square recurrence extends these finite bases to all
+orders and supplies the even-order slack needed in the line-graph proof.
 
 \begin{lemma}[Local clique slack]\label{lem:clique}
 For every integer $d\geq 0$,
@@ -159,6 +289,10 @@ If $d\geq 6$ is even, then
 \end{lemma}
 
 \begin{proof}
+The construction has two levels: pack triangles between three equal parts,
+then add packings inside the parts.  Since these use different edges, their
+sizes add.  A finite collection of small packings starts the induction.
+
 For $q>0$, partition $3q$ vertices into three copies $A,B,C$ of
 $\mathbb Z/q\mathbb Z$.  Take the $q^2$ triangles
 \[
@@ -208,9 +342,7 @@ p_n&15&16&18&22&28&29&32&37&45&46
 \end{array}
 \]
 Direct substitution verifies $t(n)\leq2p_n$ and, for even $n\geq6$,
-$t(n)+2\leq2p_n$.  The formal proof checks the same literal lists for
-three-element cardinality, pairwise intersection size at most one, and
-these numerical bounds.
+$t(n)+2\leq2p_n$.
 
 Proceed by strong induction.  For $n\geq21$, write $n=3q+s$ with
 $q\geq7$ and $0\leq s<3$.  The function $t$ is nondecreasing, and
@@ -228,7 +360,51 @@ is $2r^2-4r-4\geq0$ for $r\geq3$.  The induction hypothesis,
 This proves both assertions, including the required even-order slack.
 \end{proof}
 
+\subsection{Balanced edge colorings}\label{sec:color}
+
+Both cover constructions use a red-blue coloring of the root edges with
+nearly equal color degrees at each vertex.  Alternating colors along an
+Euler tour pairs an entering edge with a differently colored leaving edge
+at each visit; the only possible mismatch is where the tour closes.  The
+following lemma also handles components without an Euler tour by first
+adding a dummy vertex.
+
+\begin{samepage}
+\begin{lemma}[Alternating Euler coloring]\label{lem:euler-color}
+Let $K$ be a connected graph.
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item If $K$ has an odd-degree vertex, its edges can be colored red and blue
+        so that the two color degrees are equal at every even-degree vertex
+        and differ by one at every odd-degree vertex.
+  \item If every degree of $K$ is even and $|E(K)|$ is even, the two color
+        degrees can be made equal at every vertex.
+  \item If every degree of $K$ is even and $|E(K)|$ is odd, the two color
+        degrees can be made equal except at one chosen seam vertex, where they
+        differ by two.
+\end{enumerate}
+\end{lemma}
+\end{samepage}
+
+\begin{proof}
+For (a), add a new dummy vertex adjacent to every odd-degree vertex.  The
+augmented graph is connected and Eulerian.  Start an Euler tour at the dummy
+vertex and color successive tour edges alternately.  At every original vertex
+the tour edges pair into differently colored entering and leaving edges.  Any
+odd cyclic seam occurs at the dummy vertex.  After deleting the dummy edges,
+the stated balances remain.
+
+For (b) and (c), an isolated vertex needs no coloring.  Otherwise alternately
+color an Euler tour of $K$.  If the tour length is even, every visit pairs two
+different colors.  If it is odd, the first and
+last edges have the same color and the unique discrepancy of two occurs at
+the starting vertex.
+\end{proof}
+
 \section{Line graphs}\label{sec:line}
+
+An edge of a line graph is a \emph{wedge} in the root: two root edges
+meeting at a vertex.  This common endpoint assigns each line-graph edge to
+a unique incidence clique.
 
 Let $H$ be a finite simple graph.  For $v\in V(H)$, let $W_v$ be the set of
 edges of $L(H)$ corresponding to unordered pairs of distinct root edges
@@ -255,6 +431,66 @@ element or are $\{x,y\},\{x,z\},\{y,z\}$.  Applied to three pairwise adjacent
 root edges, these are precisely the two stated cases.
 \end{proof}
 
+Figure~\ref{fig:triangle-types} shows the distinction and the effect of a
+shared coloring.  A root triangle also gives the simplest reason that
+independent local covers do not suffice: if $H$ is just a triangle, each
+incidence clique is a $K_2$ with no triangle to cover, yet $L(H)$ is a
+triangle.  The local choices must therefore be coordinated.
+
+\begin{figure}[tbp]
+\centering
+\begin{tabular}{ccc}
+\multicolumn{3}{c}{\small (a) Three edges at one root vertex: a star triangle}\\[4pt]
+\begin{tikzpicture}[scale=.85,baseline=0]
+  \draw[red edge] (-1,1)--node[left] {$a$} (0,0)
+    --node[right] {$b$} (1,1);
+  \draw[blue edge] (0,0)--node[right] {$c$} (0,-1);
+  \node[original,label=left:$v$] at (0,0) {};
+  \node[original] at (-1,1) {};
+  \node[original] at (1,1) {};
+  \node[original] at (0,-1) {};
+  \path (-1.5,-1.35) rectangle (1.5,1.35);
+\end{tikzpicture}
+&\quad$\longmapsto$\quad&
+\begin{tikzpicture}[scale=.85,baseline=0]
+  \draw[graph edge] (-1,.8)--(0,-.9)--(1,.8);
+  \draw[selected] (-1,.8)--(1,.8);
+  \node[redvertex,label=above left:$a$] at (-1,.8) {};
+  \node[redvertex,label=above right:$b$] at (1,.8) {};
+  \node[bluevertex,label=below:$c$] at (0,-.9) {};
+  \node[font=\small] at (0,.15) {$W_v$};
+  \path (-1.5,-1.35) rectangle (1.5,1.35);
+\end{tikzpicture}\\[7pt]
+\multicolumn{3}{c}{\small (b) Three edges around a root triangle: three packets}\\[4pt]
+\begin{tikzpicture}[scale=.85,baseline=0]
+  \draw[red edge] (-1,.8)--node[above] {$a$} (1,.8)
+    --node[right] {$b$} (0,-.9);
+  \draw[blue edge] (0,-.9)--node[left] {$c$} (-1,.8);
+  \node[original,label=above left:$x$] at (-1,.8) {};
+  \node[original,label=above right:$y$] at (1,.8) {};
+  \node[original,label=below:$z$] at (0,-.9) {};
+  \path (-1.5,-1.35) rectangle (1.5,1.35);
+\end{tikzpicture}
+&\quad$\longmapsto$\quad&
+\begin{tikzpicture}[scale=.85,baseline=0]
+  \draw[graph edge] (-1,.8)--node[left,font=\small] {$W_x$} (0,-.9)
+    --node[right,font=\small] {$W_z$} (1,.8);
+  \draw[selected] (-1,.8)--node[above,font=\small] {$W_y$} (1,.8);
+  \node[redvertex,label=above left:$a$] at (-1,.8) {};
+  \node[redvertex,label=above right:$b$] at (1,.8) {};
+  \node[bluevertex,label=below:$c$] at (0,-.9) {};
+  \path (-1.5,-1.35) rectangle (1.5,1.35);
+\end{tikzpicture}
+\end{tabular}
+\caption{The two kinds of line-graph triangle.  Solid root edges and filled
+line-graph vertices are red; dashed root edges and open vertices are blue.
+The bold line-graph edge joins two red vertices and is selected for the
+cover.  In (a), all three line-graph edges lie in $W_v$; in (b), they lie
+in three different packets.  A single coloring covers both configurations
+because every triangle has two vertices of the same color.}
+\label{fig:triangle-types}
+\end{figure}
+
 The star triangles in $W_v$ form the triangle system of $K_{d_H(v)}$.
 Choose $D(d_H(v))$ edge-disjoint star triangles at every root vertex.  The
 packet partition \eqref{eq:wedge-partition} shows that their union is a
@@ -268,40 +504,9 @@ Write
 \end{equation}
 Lemma~\ref{lem:clique} gives $T\leq 2P_0$.
 
-The cover uses a balanced red-blue coloring of the root edges.  We isolate
-the required form.
-
-\begin{lemma}[Alternating Euler coloring]\label{lem:euler-color}
-Let $K$ be a connected graph.
-\begin{enumerate}[label=\textup{(\alph*)}]
-  \item If $K$ has an odd-degree vertex, its edges can be colored red and blue
-        so that the two color degrees are equal at every even-degree vertex
-        and differ by one at every odd-degree vertex.
-  \item If every degree of $K$ is even and $|E(K)|$ is even, the two color
-        degrees can be made equal at every vertex.
-  \item If every degree of $K$ is even and $|E(K)|$ is odd, the two color
-        degrees can be made equal except at one chosen seam vertex, where they
-        differ by two.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-For (a), add a new dummy vertex adjacent to every odd-degree vertex.  The
-augmented graph is connected and Eulerian.  Start an Euler tour at the dummy
-vertex and color successive tour edges alternately.  At every original vertex
-the tour edges pair into differently colored entering and leaving edges.  Any
-odd cyclic seam occurs at the dummy vertex.  After deleting the dummy edges,
-the stated balances remain.
-
-For (b) and (c), an isolated vertex needs no coloring.  Otherwise alternately
-color an Euler tour of $K$.  If the tour length is even, every visit pairs two
-different colors.  If it is odd, the first and
-last edges have the same color and the unique discrepancy of two occurs at
-the starting vertex.
-\end{proof}
-
-Given such a coloring, select in $W_v$ every wedge whose two root edges have
-the same color.  Every star triangle is hit by the pigeonhole principle.
+Apply Lemma~\ref{lem:euler-color} componentwise and select in $W_v$ every
+wedge whose two root edges have the same color.  Every star triangle is hit
+by the pigeonhole principle.
 Every root triangle is hit because two of its three root edges have the
 same color.  If the red and blue degrees at $v$ are $a$ and $b$, the local
 cost is
@@ -311,11 +516,16 @@ cost is
 By \eqref{eq:t-values}, this equals $t(d_H(v))$ when an even degree is
 balanced or an odd degree differs by one.  At a difference-two even degree it
 equals $t(d_H(v))+1$.
+For example, at a degree-four vertex a two-red, two-blue split selects two
+wedges; a three-red, one-blue split selects three.  The Euler exception
+therefore has a precise cost of one extra cover edge.
 
 Consequently, every connected component has a cover of cost at most its
 contribution to $T$, except possibly a connected Eulerian component with an
-odd number of edges.  Such a component has a cover with one extra edge.  The
-following lemma absorbs this unique surcharge.
+odd number of edges, where the cover may cost one extra edge.  The following
+lemma absorbs this surcharge using existing packing slack, an independent
+local cover when the root is triangle-free, or one additional packed root
+triangle.
 
 \begin{lemma}[Odd Eulerian seam repair]\label{lem:seam}
 Let $K$ be a connected Eulerian component of $H$ with an odd number of edges.
@@ -369,15 +579,14 @@ components, so the component covers and packings may be united.  This proves
 $\tau_\tri(L(H))\leq2\nu_\tri(L(H))$.
 
 For sharpness, $L(K_{1,4})\cong K_4$ has
-$(\nu_\tri,\tau_\tri)=(1,2)$.  Indeed, every two of its triangles share an
-edge, one edge cannot meet all four triangles, and two opposite edges do.
+$(\nu_\tri,\tau_\tri)=(1,2)$, as shown in Figure~\ref{fig:packing-cover}.
 \end{proof}
 
 \begin{remark}
-The quantifier in Lemma~\ref{lem:seam} is one surcharge per connected
-Eulerian odd-edge component, not per block, root triangle, or high-degree
-vertex.  Odd cycles show why the triangle-free branch must discard the Euler
-seam rather than charge it to a nonexistent local packing.
+There is only one seam per connected Eulerian component with an odd number
+of edges.  The triangle-free case can require a different cover: for a
+five-cycle, $T_K=P_K=0$ and the line graph has no triangles, yet the
+alternating Euler cover selects one edge.
 \end{remark}
 
 \section{Total graphs}\label{sec:total}
@@ -398,6 +607,14 @@ pairs of root edges meeting at $v$.  These packet edge sets are pairwise
 disjoint.  Original root edges lie outside all of them.
 For a root edge $uv$, let $B_{uv}=\{u,uv,v\}$ be its \emph{bridge triangle};
 here $uv$ inside the vertex set denotes the edge-vertex.
+
+The original vertex in $Q_v$ restores local balance.  An Euler coloring
+leaves a color-degree difference of at most two; adding $v$ to the smaller
+side makes the difference at most one, even at a seam.  For example, a
+three-red, one-blue split becomes three against two when $v$ is blue.
+Selecting all original root edges costs a further $m$ edges, but their
+bridges supply $m$ triangles for the packing.  In
+Figure~\ref{fig:operators}, these bridges are $uav$ and $vbw$.
 
 \begin{proof}[Proof of Theorem~\ref{thm:total}]
 Apply Lemma~\ref{lem:euler-color} componentwise to color the root edges red
@@ -448,11 +665,14 @@ follow from \eqref{eq:t-values} and the degree sum.  Therefore
 where the penultimate inequality is Lemma~\ref{lem:clique}.
 \end{proof}
 
-\section{Cubic triangle-free roots}\label{sec:triangle-free}
+\subsection{Exact values for cubic triangle-free roots}\label{sec:triangle-free}
 
-For a cubic triangle-free root, a distinct choice of one incident edge at
-each vertex gives a smaller cover.  We first prove the assignment used in
-the formal development.
+For a cubic triangle-free root, each packet is a $K_4$, whose triangles
+are covered by two opposite edges (Figure~\ref{fig:packing-cover}).  One
+of these is an incidence edge and also covers its bridge, so the
+corresponding original edge need not be selected.  Distinct choices at the
+root vertices give one saving per vertex.  Hall's theorem ensures that
+these choices can be made simultaneously.
 
 \begin{lemma}[Distinct incident-edge representatives]\label{lem:hall}
 If a finite simple graph $F$ has minimum degree at least two, there is an
@@ -488,8 +708,7 @@ bridge.  To see this directly, three original vertices would give a root
 triangle; two original vertices force their joining edge-vertex; one
 original vertex forces the other two edge-vertices into its packet; and
 three edge-vertices are classified by Lemma~\ref{lem:line-class}, whose
-root-triangle case is excluded.  This is the same case analysis used in
-the formal cover proof.  The selection is therefore a transversal.  Its
+root-triangle case is excluded.  The selection is therefore a transversal.  Its
 size is at most
 \[
   2n+\bigl(m-|p(V(F))|\bigr)=2n+(m-n)=m+n=5n/2,
@@ -502,57 +721,7 @@ distinct edge for each member of an edge-disjoint packing, so
 \]
 \end{proof}
 
-\section{Formal verification}\label{sec:formal}
-
-The accompanying \href{https://github.com/samuelmasse/tuza-line-total-graphs}
-{Lean repository} implements the constructions presented above.  The local
-clique proof uses the Latin packing, the same finite lists for orders below
-21, and the same strong-induction inequality.  The line and total proofs
-use the Euler colorings, packet unions and seam repair described here;
-the cubic cover uses the incident-edge assignment of Lemma~\ref{lem:hall}.
-The earlier balanced-orientation refinement is retained in a separate
-informal note in the repository and is not a result of this revised paper.
-
-The four headline declarations are
-\begin{center}
-\small
-\begin{tabular}{ll}
-Theorem~\ref{thm:line} & \texttt{Tuza.lineGraph\_satisfiesTuza}\\
-Line-graph sharpness & \texttt{Tuza.lineGraph\_factor\_sharp}\\
-Theorem~\ref{thm:total} & \texttt{Tuza.totalGraph\_satisfiesTuza}\\
-Corollary~\ref{cor:cubic} & \texttt{Tuza.cubic\_triangleFree\_total\_parameters}
-\end{tabular}
-\end{center}
-The formal graph definitions use ordinary finite simple graphs, edge-disjoint
-triangle packings and edge transversals.  Empty and disconnected roots are
-included.  The cubic conclusion uses the equivalent natural-number identities
-$2\tau_\tri=5|V(F)|$ and $2\nu_\tri=5|V(F)|$.
-
-The 8 October 2026 revision builds with Lean 4.35.0-rc4 and matching pinned
-Mathlib sources.  Local axiom audits, fresh Lean kernel replay and a separate
-NanoDa replay accept all four headline proofs.  These checks establish the
-encoded results; they do not establish novelty or human expert review.
-
-At source commit \texttt{82f6bb5}, using Lean 4.33.1 and the pinned Mathlib
-dependency, all four declarations passed
-\href{https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/34193414990}
-{Palomar's Comparator check and replay by Lean and NanoDa}.
-Only propositional extensionality, classical choice and quotient soundness
-occur in the audited axioms.  The deliberately incomplete Challenge
-statements are separate from the completed Solution proofs.  A detailed
-proof-to-declaration map and full commit identifiers are provided in the
-repository.  That mechanical run checked the Lean sources before this
-expository revision.  Its later rendering stage failed before automated
-review.  No Palomar review or registration of the present revision is claimed.
-
 \section{Concluding remarks}
-
-The two operator classes permit globally compatible certificates because
-adjacent root edges have a unique common endpoint.  In line graphs, the
-only possible loss in an Euler coloring is one extra selected wedge per
-connected Eulerian component with an odd number of edges.  In total graphs,
-the original vertex balances its enlarged incidence clique, while bridge
-triangles pay for the selection of original root edges.
 
 The factor two is sharp for line graphs.  We do not determine the best
 factor for total graphs, although the cubic triangle-free case has equality
@@ -560,14 +729,29 @@ between packing and transversal numbers.  Extensions to multigraph roots,
 generalized line graphs, or quasi-line graphs require additional arguments
 and are not claimed here.
 
+\paragraph{Formal verification.}\label{sec:formal}
+
+Theorems~\ref{thm:line} and~\ref{thm:total}, including line-graph sharpness,
+and Corollary~\ref{cor:cubic} are formalized in Lean~4 with Mathlib.
+The formalization implements the clique packings, Euler colorings,
+componentwise seam repair and incident-edge assignment used above.
+The source code and instructions for checking the proofs are available at
+\begin{center}
+\url{https://github.com/samuelmasse/tuza-line-total-graphs}.
+\end{center}
+The accompanying proof version is
+\href{https://github.com/samuelmasse/tuza-line-total-graphs/tree/33a75de51646668b1058c8d505e0b8d0d16bead4}
+{commit \texttt{33a75de}}, which pins Lean 4.35.0-rc4 and its Mathlib dependency.
+The repository gives the correspondence between the paper's results and the
+formal declarations.  Their proofs use propositional extensionality,
+classical choice and quotient soundness, with no additional axioms.
+
 \paragraph{AI assistance.}
 The author acknowledges the assistance of OpenAI's GPT-6 Astra in developing
 the proofs, checking arguments, searching the literature, preparing the
-exposition, and constructing the Lean formalization.  The finite clique
-certificates are part of the proof and are checked by Lean's kernel;
-exploratory computations and bounded graph tests are not premises of the
-universal results.
+exposition, and constructing the Lean formalization.
 
+\clearpage
 \bibliographystyle{plain}
 \begingroup
 \raggedright

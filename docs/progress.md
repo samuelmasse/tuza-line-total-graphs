@@ -55,10 +55,12 @@ has been rebuilt and visually reviewed. See the
 [publication audit](publication-review-2026-10-08.md) for evidence and limits.
 
 The [new reusable full-preflight workflow](../.github/workflows/palomar-preflight.yml)
-is prepared. It has not run against a published October source commit.
-The author authorized committing, pushing and running this preflight on
-8 October after the review. No new intake or registration has been created.
-The [submission preview](submission-preview.md) records the release sequence.
+passed on published commit `33a75de51646668b1058c8d505e0b8d0d16bead4` with
+no errors or warnings. After the author approved the exact submission tuple,
+Palomar accepted intake `137519rx0911` at 16:37:52 UTC on 8 October.
+[Registry verification](https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/37810306541)
+is in progress. No registration consent has been given. The
+[submission history](palomar-submission.md) records the current intake.
 
 ## Dependency plan
 

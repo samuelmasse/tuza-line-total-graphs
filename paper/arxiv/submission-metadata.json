@@ -1,0 +1,52 @@
+{
+  "status": "arXiv draft 8202368 awaiting math.CO endorsement; agreement accepted and CC BY 4.0 selected; source not yet uploaded",
+  "task_mode": "VERIFICATION: package the frozen paper and guide author reading",
+  "title": "Tuza's conjecture for line and total graphs",
+  "authors": "Samuel Massé",
+  "arxiv_authors_ascii": "Samuel Mass\\'{e}",
+  "primary_category": "math.CO",
+  "cross_lists": [],
+  "abstract": "For a finite simple graph $G$, let $\\nu_\\triangle(G)$ be the maximum number of pairwise edge-disjoint triangles and let $\\tau_\\triangle(G)$ be the minimum number of edges meeting every triangle. We prove $\\tau_\\triangle(G)\\leq 2\\nu_\\triangle(G)$ when $G$ is the line graph or the total graph of any finite simple graph. The proofs use local triangle packings in incidence cliques and edge colorings obtained from Euler tours. The factor two is sharp over line graphs. For every cubic triangle-free graph $F$, we also prove the exact identity $\\tau_\\triangle(\\operatorname{Tot}(F))=\\nu_\\triangle(\\operatorname{Tot}(F))=5|V(F)|/2$. The results are formalized in Lean 4.",
+  "comments": "10 pages, 3 figures. Accompanying Lean formalization: https://github.com/samuelmasse/tuza-line-total-graphs",
+  "journal_reference": null,
+  "doi": null,
+  "license": "CC BY 4.0",
+  "top_level_file": "main.tex",
+  "compiler": "pdflatex",
+  "archive_files": [
+    "main.tex",
+    "references.bib",
+    "main.bbl"
+  ],
+  "source_archive_sha256": "18ccb09e90642d1f3b97b49c78bba9b9ffca7dca77ce45efd9c8fb7e88cd6dd5",
+  "validation": [
+    "Clean BibTeX/pdfLaTeX compilation with no final warnings or box diagnostics",
+    "All 8 theorem, lemma, and corollary statements identical to the checked proof version; only order and numbering changed",
+    "All 8 proof environments and all 3 vector figures unchanged from the pre-structure polished draft",
+    "Lean source files and dependency pins unchanged; earlier formal verification applies to the same proof inputs",
+    "All 10 PDF pages rendered and visually inspected; renumbered references and final page breaks checked",
+    "ZIP contains exactly main.tex, references.bib, main.bbl and matches the current manuscript",
+    "Extracted ZIP compiled in a fresh directory without warnings; PDF text matches the reviewed PDF"
+  ],
+  "remaining": [
+    "Obtain personal arXiv endorsement for math.CO; request generated and emailed by arXiv",
+    "Upload the reviewed source archive after endorsement",
+    "Check arXiv compilation and fill metadata",
+    "Review the completed draft with the author before final submission"
+  ],
+  "formal_proof_commit": "33a75de51646668b1058c8d505e0b8d0d16bead4",
+  "manuscript_revision": "Local structural organization revision, 8 October 2026; not yet committed or pushed",
+  "manuscript_pdf_sha256": "a13e8b3cfda685ed599e1a06bfb59cf699c44f7452d021a45c285c31ee5a28b8",
+  "previous_reviewed_pdf_sha256": "254b234ce627184948b2a888fb9b90c03f9d13240fee01ea6b22718250165a34",
+  "manuscript_tex_sha256": "8d6ac852470c4f849a7c861671d0d721ce597cafcdbf142c2e9b724332b99069",
+  "previous_editorial_pdf_sha256": "2699a10c4ab9c37dc27f3d3af47989efa3cbdedcbb7192e60eac7e9499a20d27",
+  "previous_illustrated_pdf_sha256": "82e58a4175be2b4fb3a59589ecdce0d4851f4e8592b8ccb2e9740e358aad166a",
+  "previous_polished_pdf_sha256": "dc53edb5acb72163d343db0c13c4875e35b2e0594fc96848e9e121bc8f8199da",
+  "arxiv_draft_id": "8202368",
+  "arxiv_draft_url": "https://arxiv.org/submit/8202368/start",
+  "agreement_accepted": true,
+  "source_uploaded": false,
+  "endorsement_required": true,
+  "endorsement_request_generated": true,
+  "endorsement_request_email": "samuelmasse@arizona.edu"
+}
